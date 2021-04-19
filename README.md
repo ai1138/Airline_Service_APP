@@ -1,3 +1,3 @@
 # DB-Project
 Web App for our DB class,
-Worked with Hellen Epko and Sheika Islam
+Worked with Hellen Ekpo and Sheika Islam

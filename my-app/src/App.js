@@ -7,6 +7,7 @@ import Userhome from './userhome';
 import Bookingagent from './bookingagent';
 import Navigation from './navigation';
 import Airlinestaff from './airlinestaff'
+import FormPage from './FormPage';
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
              <Route path="/userhome" component={Userhome}/>
              <Route path="/bookingagent" component={Bookingagent}/>
              <Route path="/airlinestaff" component={Airlinestaff}/>
+			 <Route path="/FormPage" component={FormPage}/>
            </Switch>
       </div>
       </BrowserRouter>

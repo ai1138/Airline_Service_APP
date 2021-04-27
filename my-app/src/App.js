@@ -8,6 +8,8 @@ import Bookingagent from './bookingagent';
 import Navigation from './navigation';
 import Airlinestaff from './airlinestaff'
 import FormPage from './FormPage';
+import BookingAgentFormPage from './BookingAgentFormPage';
+import lspage from './lspage';
 
 
 class App extends Component {
@@ -22,6 +24,8 @@ class App extends Component {
              <Route path="/bookingagent" component={Bookingagent}/>
              <Route path="/airlinestaff" component={Airlinestaff}/>
 			 <Route path="/FormPage" component={FormPage}/>
+			<Route path= "/BookingAgentFormPage" component={BookingAgentFormPage}/>
+		<Route path= "/lspage" component={lspage}/>
            </Switch>
       </div>
       </BrowserRouter>

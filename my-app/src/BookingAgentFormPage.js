@@ -1,84 +1,28 @@
-
-
 import React from 'react';
-import ReactDOM from 'react-dom';
+import Table from './Table'
+import SearchPage from './SearchPage'
+import {button} from "./button";
+import Button from '@material-ui/core/Button';
+import FormPage from './FormPage'
 
-class MyForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      age: null,
-    };
-  }
-  myChangeHandler = (event) => {
-    let nam = event.target.name;
-    let val = event.target.value;
-    this.setState({[nam]: val});
-  }
-  render() {
+ 
+const bookagent = () => {
     return (
-      <form>
-      <h1>Register {this.state.username} {this.state.age}</h1>
-      <p>Enter your name:</p>
-      <input
-        type='text'
-        name='name'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your date of birth::</p>
-      <input
-        type='text'
-        name='email'
-        onChange={this.myChangeHandler}
-      />
-      <p>Enter your email:</p>
-      <input
-        type='text'
-        name='email'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your password:</p>
-      <input
-        type='text'
-        name='password'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your local address:</p>
-      <input
-        type='text'
-        name='address'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your phone number:</p>
-      <input
-        type='text'
-        name='age'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your passport number:</p>
-      <input
-        type='text'
-        name='age'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your passport expiration date:</p>
-		<input
-        type='text'
-        name='age'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your passport country:</p>
-		<input
-        type='text'
-        name='age'
-        onChange={this.myChangeHandler}
-      />
-      </form>
+	
+ 
+       <div style = {{display: "flex", flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center"}}>
+        
+          <h1>Welcome Aboard!</h1> 
+          <Button variant="contained" color="secondary" href= './FormPage'>Log In/Register</Button>
+          <tr>At your convenience, anytime, anywhere</tr>
+          <SearchPage/>
+          <Table />
+       </div>
     );
-  }
 }
 
-export default MyForm
 
-ReactDOM.render(<MyForm />, document.getElementById('root'));
+export default bookagent;
+

@@ -15,7 +15,7 @@ const home = () => {
         justifyContent: "center"}}>
         
           <h1>Welcome Aboard!</h1> 
-          <Button variant="contained" color="secondary" href= './FormPage'>Log In/Register</Button>
+          <Button variant="contained" color="secondary" href= './lspage'>Log In/Register</Button>
           <tr>At your convenience, anytime, anywhere</tr>
           <SearchPage/>
           <Table />

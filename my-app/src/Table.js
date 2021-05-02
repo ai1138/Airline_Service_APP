@@ -1,40 +1,42 @@
-import React, {Component} from 'react'
+import React, { useMemo, useState, useEffect } from "react"
 
-class Table extends Component {
-  render() {
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>Airline</th>
-            <th>Flight Number</th>
-            <th>Departure Location</th>
-            <th>Arrival Location</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>*Airline from DB* 1 </td>
-            <td>Flight Num from DB* 1</td>
-            <td>Departure Loc from DB</td>
-            <td>Arrival Loc from DB</td> 
-          </tr>
-          <tr>
-            <td>For</td>
-            <td>Formatting</td>
-          </tr>
-          <tr>
-            <td>Purposes</td>
-            <td>Only</td>
-          </tr>
-          <tr>
-            <td>Abed</td>
-            <td>Hellen</td>
-          </tr>
-        </tbody>
-      </table>
-    )
+const fetchURL = "http://localhost:5000/flights-table";
+const getItems = () => fetch(fetchURL).then(res => res.json());
+
+function Table()
+{
+  const [data,updateData] = useState();
+  useEffect(() => {
+    getItems().then(data => updateData(data));
+  }, []);
+
+
+  let itemsToRender;
+  if (data) {
+    itemsToRender = data.map(item => {
+      console.log(item)
+      return <tr key={item.flight_num}>
+               <td> {item.flight_num} </td>
+               <td> {item.statuses} </td>
+               <td> {item.airport_arrival} </td>
+               <td> {item.departure_airport} </td>
+              </tr>
+    });
   }
-}
+  return(
+    <table>
+      <tr>
+        <td> flight_num </td>
+        <td> statuses </td>
+        <td> airport_arrival </td>
+        <td> departure_airport </td>
+      </tr>
+      {itemsToRender}
+    
+    </table>
+  )
 
-export default Table
+
+}
+export default Table;
+

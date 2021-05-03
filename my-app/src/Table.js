@@ -1,39 +1,38 @@
 import React, { useMemo, useState, useEffect } from "react"
 
-const fetchURL = "http://localhost:5000/flights-table";
-const getItems = () => fetch(fetchURL).then(res => res.json());
 
-function Table()
+
+function Table(props)
 {
-  const [data,updateData] = useState();
-  useEffect(() => {
-    getItems().then(data => updateData(data));
-  }, []);
-
-
-  let itemsToRender;
-  if (data) {
-    itemsToRender = data.map(item => {
-      console.log(item)
-      return <tr key={item.flight_num}>
-               <td> {item.flight_num} </td>
-               <td> {item.statuses} </td>
-               <td> {item.airport_arrival} </td>
-               <td> {item.departure_airport} </td>
-              </tr>
-    });
-  }
+  //const [data, setData] = useState();
+  //useEffect(() => {setData(props.data)},[]);
   return(
-    <table>
-      <tr>
-        <td> flight_num </td>
-        <td> statuses </td>
-        <td> airport_arrival </td>
-        <td> departure_airport </td>
-      </tr>
-      {itemsToRender}
+    <div>
+    {props.data && 
+      <table>
+        <tr>
+          <td> flight_num </td>
+          <td> statuses </td>
+          <td> airport_arrival </td>
+          <td> departure_airport </td>
+        </tr>
+        {props.data.map((item, index) => (
+          <tr key={item.flight_num}>
+             <td> {item.flight_num} </td>
+             <td> {item.statuses} </td>
+             <td> {item.airport_arrival} </td>
+             <td> {item.departure_airport} </td>  
+          </tr>
+       ))}
+      
+      </table>
+    }
+    {/* {!props.data &&
+      <h1> Loading </h1>
+    } */}
+
     
-    </table>
+    </div>
   )
 
 

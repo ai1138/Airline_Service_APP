@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import Table from './Table'
 import SearchPage from './SearchPage'
 import {button} from "./button";
@@ -15,10 +16,9 @@ const home = () => {
         justifyContent: "center"}}>
         
           <h1>Welcome Aboard!</h1> 
-          <Button variant="contained" color="secondary" href= './lspage'>Log In/Register</Button>
+          <Link variant="contained" color="secondary" to= '/lspage'>Log In/Register</Link>
           <tr>At your convenience, anytime, anywhere</tr>
           <SearchPage/>
-          <Table />
        </div>
     );
 }

@@ -17,15 +17,14 @@ class App extends Component {
     return (
       <BrowserRouter>
       <div className="App">
-        <Navigation />
         <Switch>
              <Route path="/" component={home} exact/>
              <Route path="/userhome" component={Userhome}/>
              <Route path="/bookingagent" component={Bookingagent}/>
              <Route path="/airlinestaff" component={Airlinestaff}/>
-			 <Route path="/FormPage" component={FormPage}/>
-			<Route path= "/BookingAgentFormPage" component={BookingAgentFormPage}/>
-		<Route path= "/lspage" component={lspage}/>
+			       <Route path="/FormPage" component={FormPage}/>
+			       <Route path= "/BookingAgentFormPage" component={BookingAgentFormPage}/>
+	           <Route path= "/lspage" component={lspage}/>
            </Switch>
       </div>
       </BrowserRouter>

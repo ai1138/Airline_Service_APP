@@ -18,7 +18,6 @@ conn = pymysql.connect(host='localhost',
 
 @app.route('/login/:id/:passwrd', methods =['GET'])
 def login():
-    arr = ['`customer`' , '`booking_agent`', 'airline_staff']
     userName = request.args.get("id")
     pw = request.args.get("id")
     cursor = conn.cursor()
@@ -31,12 +30,15 @@ def signIn():
     data = request.json
     if(data["user"]["role"] == "customer"):
         cursor = conn.cursor()
-        #query = 
+        query = "INSERT INTO airline_staff(username, airline_id, passwords, first_name, last_name, date_of_birth, phone_number)"
         cursor.execute(query)
     elif(data["user"]["role"] == "bookingagent"):
         pass
     else:
-        pass
+        cursor = conn.cursor()
+        query = "INSERT INTO airline_staff(username, airline_id, passwords, first_name, last_name, date_of_birth, phone_number)"
+        q2  = "VALUES ('he245','1234','abedmusic','abed','islam','2000-10-11','5165246789');"
+        cursor.execute(query)
 @app.route('/flights-table',methods=['GET'])
 def getFlights():
     cursor = conn.cursor()

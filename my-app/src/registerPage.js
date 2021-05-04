@@ -21,7 +21,8 @@ function Registerpage ()
    const [username, setUserName] = useState("");
    const [password, setPassWord] = useState("");
    const [airline, setAirLine] = useState("");
-   const [form, setForm] = useState();
+   const [dob, setDOB] = useState("");
+   const [phoneNumber, setPhoneNumber] = useState("");
 
    const user =
    {
@@ -31,7 +32,9 @@ function Registerpage ()
       "email" : email,
       "username" : username,
       "password" : password,
-      "airline" : airline
+      "airline" : airline,
+      "dob" : dob,
+      "phoneNumber": phoneNumber
 
    };
    const alert = (
@@ -51,57 +54,62 @@ function Registerpage ()
    }
    const submitCustomerForm = () =>
    {
-      if(firstName !== "")
-         if(lastName !== "")
-            if(email !== "")
-               if(username !== "")
-                  if(password !== "")
-                  {
-                     user.role = "customer";
-                     fetch('http://localhost:5000/register', {
-                        method: 'POST',
-                        body: JSON.stringify({ user }),
-                        headers: { 'Content-Type': 'application/json' },
-                      }).then(res => res.json()).then(json => setForm(json.user));
-                      console.log(user);
-                  }
+      if(dob !== "")
+         if(phoneNumber !== "")
+            if(firstName !== "")
+               if(lastName !== "")
+                  if(email !== "")
+                     if(username !== "")
+                        if(password !== "")
+                        {
+                           user.role = "customer";
+                           fetch('http://localhost:5000/register', {
+                              method: 'POST',
+                              body: JSON.stringify({ user }),
+                              headers: { 'Content-Type': 'application/json' },
+                           }).then(res => res.json()).then(json => setForm(json.user));
+                           console.log(user);
+                        }
      
    }
    const submitBAForm = () =>
    {
-      if(firstName !== "")
-         if(lastName !== "")
-            if(email !== "")
-               if(username !== "")
-                  if(password !== "")
-                  {
-                     user.role = "bookingagent";
-                     fetch('http://localhost:5000/register', {
-                        method: 'POST',
-                        body: JSON.stringify({ user }),
-                        headers: { 'Content-Type': 'application/json' },
-                     }).then(res => res.json()).then(json => setForm(json.user));
-                     console.log(user);
-                  }
-  
+      if(phoneNumber !== "")
+         if(dob !== "")
+            if(firstName !== "")
+               if(lastName !== "")
+                  if(email !== "")
+                     if(username !== "")
+                        if(password !== "")
+                        {
+                           user.role = "bookingagent";
+                           fetch('http://localhost:5000/register', {
+                              method: 'POST',
+                              body: JSON.stringify({ user }),
+                              headers: { 'Content-Type': 'application/json' },
+                           }).then(res => res.json()).then(json => setForm(json.user));
+                           console.log(user);
+                        }
    }
    const submitAirLineForm = () =>
    {
-      if(airline !== "")
-         if(firstName !== "")
-            if(lastName !== "")
-               if(email !== "")
-                  if(username !== "")
-                     if(password !== "")
-                     {
-                        user.role = "airline";
-                        fetch('http://localhost:5000/register', {
-                           method: 'POST',
-                           body: JSON.stringify({ user }),
-                           headers: { 'Content-Type': 'application/json' },
-                        }).then(res => res.json()).then(json => setForm(json.user));
-                        console.log(user);
-                     }
+      if(dob !== "")
+         if(phoneNumber !== "")
+            if(airline !== "")
+               if(firstName !== "")
+                  if(lastName !== "")
+                     if(email !== "")
+                        if(username !== "")
+                           if(password !== "")
+                           {
+                              user.role = "airline";
+                              fetch('http://localhost:5000/register', {
+                                 method: 'POST',
+                                 body: JSON.stringify({ user }),
+                                 headers: { 'Content-Type': 'application/json' },
+                              }).then(res => res.json()).then(json => setForm(json.user));
+                              console.log(user);
+                           }
    }
    const customerForm = (
       <form>
@@ -119,6 +127,20 @@ function Registerpage ()
         name='name'
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
+      />
+      <p>Enter your date of birth:</p>
+      <input
+        type='text'
+        name='name'
+        value={dob}
+        onChange={(e) => setDOB(e.target.value)}
+      />
+      <p>Enter your phone number:</p>
+      <input
+        type='text'
+        name='name'
+        value={phoneNumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
       />
       <p>Enter your email:</p>
       <input
@@ -161,6 +183,20 @@ function Registerpage ()
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
       />
+      <p>Enter your date of birth:</p>
+      <input
+        type='text'
+        name='name'
+        value={dob}
+        onChange={(e) => setDOB(e.target.value)}
+      />
+      <p>Enter your phone number:</p>
+      <input
+        type='text'
+        name='name'
+        value={phoneNumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
+      />
       <p>Enter your email:</p>
       <input
         type='text'
@@ -201,6 +237,20 @@ function Registerpage ()
         name='name'
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
+      />
+      <p>Enter your date of birth:</p>
+      <input
+        type='text'
+        name='name'
+        value={dob}
+        onChange={(e) => setDOB(e.target.value)}
+      />
+      <p>Enter your phone number:</p>
+      <input
+        type='text'
+        name='name'
+        value={phoneNumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
       />
       <p>Enter which airline you work for:</p>
       <input

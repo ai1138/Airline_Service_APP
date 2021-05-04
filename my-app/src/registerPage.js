@@ -34,7 +34,19 @@ function Registerpage ()
    }
    const submitCustomerForm = () =>
    {
-      console.log("submitty");
+      if(firstName !== "")
+         if(lastName !== "")
+            if(email !== "")
+               if(username !== "")
+                  if(password !== "")
+                  {
+                     console.log("works")
+                  }
+                  else
+                  {
+                     console.log("didnt work")
+                  }
+     
    }
    const submitBAForm = () =>
    {

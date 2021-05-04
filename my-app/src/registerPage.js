@@ -23,6 +23,7 @@ function Registerpage ()
    const [airline, setAirLine] = useState("");
    const [dob, setDOB] = useState("");
    const [phoneNumber, setPhoneNumber] = useState("");
+   const [form,setForm] = useState();
 
    const user =
    {

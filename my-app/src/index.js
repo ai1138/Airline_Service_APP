@@ -8,7 +8,6 @@ import Userhome from './userhome';
 import Bookingagent from './bookingagent';
 import Navigation from './navigation';
 import Airlinestaff from './airlinestaff'
-import BookingAgentFormPage from './BookingAgentFormPage';
 import Lspage from './lspage';
 import SearchBar from './SearchBar';
 
@@ -20,7 +19,6 @@ import SearchBar from './SearchBar';
                 <Route path="/userhome" component={Userhome}/>
                 <Route path="/bookingagent" component={Bookingagent}/>
                 <Route path="/airlinestaff" component={Airlinestaff}/>
-                <Route path= "/BookingAgentFormPage" component={BookingAgentFormPage}/>
                 <Route path= "/lspage" component={Lspage}/>
                 <Route path= "./SearchBar" component={SearchBar}/>
             </Switch>

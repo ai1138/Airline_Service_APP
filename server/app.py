@@ -1,7 +1,10 @@
 from flask import Flask
 from flask import jsonify
+from flask import request
+from flask import make_response
 import pymysql.cursors 
 from flask_cors import CORS
+import jwt
 app = Flask(__name__)
 CORS(app)
  
@@ -12,14 +15,28 @@ conn = pymysql.connect(host='localhost',
                        charset='utf8mb4',
                        cursorclass=pymysql.cursors.DictCursor)
 
-class user():
-    def __init__(self,id,role,token):
-        self.id = id
-        self.role = role
-        self.token = token
-@app.route('/loginAuth',methods=['GET'])
-def loginAuth():
-    pass
+
+@app.route('/login/:id/:passwrd', methods =['GET'])
+def login():
+    arr = ['`customer`' , '`booking_agent`', 'airline_staff']
+    userName = request.args.get("id")
+    pw = request.args.get("id")
+    cursor = conn.cursor()
+    query = 'SELECT * FROM `customer` WHERE `email` = ' '"' + userName  + '"' + ' AND `passwords` = ' + '"' + pw  + '""'
+    cursor.execute(query)
+    data = cursor.fetchall()
+    return jsonify(data)
+@app.route('/register',methods =['POST'])
+def signIn():
+    data = request.json
+    if(data["user"]["role"] == "customer"):
+        cursor = conn.cursor()
+        #query = 
+        cursor.execute(query)
+    elif(data["user"]["role"] == "bookingagent"):
+        pass
+    else:
+        pass
 @app.route('/flights-table',methods=['GET'])
 def getFlights():
     cursor = conn.cursor()
@@ -32,9 +49,7 @@ def getFlights():
 def home():
     return "hello"
 
-@app.route('/flights-searchFlight',methods = ['Post'])
-def searchDb():
-    data = request.get_json()
+
     
 
 def index():

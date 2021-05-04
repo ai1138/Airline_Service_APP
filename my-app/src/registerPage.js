@@ -6,12 +6,14 @@ import Button from '@material-ui/core/Button';
 
 
 
+
 function Registerpage () 
 {
    //toggles for buttons
    const [customerRegisterShown,setCustomerRegisterShown] = useState(false);
    const [bookingAgentRegisterShown,setBookingAgentRegisterShown] = useState(false);
    const [airlineRegisterShown,setAirlineRegisterShown] = useState(false);
+   const [errors,setErrors]  = useState(false);
    //form states
    const [firstName, setFirstName] = useState("");
    const [lastName, setLastName] = useState("");
@@ -19,7 +21,22 @@ function Registerpage ()
    const [username, setUserName] = useState("");
    const [password, setPassWord] = useState("");
    const [airline, setAirLine] = useState("");
+   const [form, setForm] = useState();
 
+   const user =
+   {
+      "role" : "",
+      "firstName" : firstName,
+      "lastName" : lastName,
+      "email" : email,
+      "username" : username,
+      "password" : password,
+      "airline" : airline
+
+   };
+   const alert = (
+      <p>enter all info</p>
+   )
    const CustomerRender = (props) => 
    {
       setCustomerRegisterShown(!customerRegisterShown);
@@ -40,21 +57,51 @@ function Registerpage ()
                if(username !== "")
                   if(password !== "")
                   {
-                     console.log("works")
-                  }
-                  else
-                  {
-                     console.log("didnt work")
+                     user.role = "customer";
+                     fetch('http://localhost:5000/register', {
+                        method: 'POST',
+                        body: JSON.stringify({ user }),
+                        headers: { 'Content-Type': 'application/json' },
+                      }).then(res => res.json()).then(json => setForm(json.user));
+                      console.log(user);
                   }
      
    }
    const submitBAForm = () =>
    {
-      console.log("submitted");
+      if(firstName !== "")
+         if(lastName !== "")
+            if(email !== "")
+               if(username !== "")
+                  if(password !== "")
+                  {
+                     user.role = "bookingagent";
+                     fetch('http://localhost:5000/register', {
+                        method: 'POST',
+                        body: JSON.stringify({ user }),
+                        headers: { 'Content-Type': 'application/json' },
+                     }).then(res => res.json()).then(json => setForm(json.user));
+                     console.log(user);
+                  }
+  
    }
    const submitAirLineForm = () =>
    {
-      console.log("submitted");
+      if(airline !== "")
+         if(firstName !== "")
+            if(lastName !== "")
+               if(email !== "")
+                  if(username !== "")
+                     if(password !== "")
+                     {
+                        user.role = "airline";
+                        fetch('http://localhost:5000/register', {
+                           method: 'POST',
+                           body: JSON.stringify({ user }),
+                           headers: { 'Content-Type': 'application/json' },
+                        }).then(res => res.json()).then(json => setForm(json.user));
+                        console.log(user);
+                     }
    }
    const customerForm = (
       <form>
@@ -138,7 +185,7 @@ function Registerpage ()
       <Button variant="contained" color="blue" onClick = {submitBAForm}>submit</Button>
       </form>
    );
-   const airLineForm=  (
+   const airLineForm =  (
       <form>
       <h1>Register </h1>
       <p>Enter your first  name:</p>
@@ -179,24 +226,24 @@ function Registerpage ()
       <Button variant="contained" color="blue" onClick = {submitAirLineForm}>submit</Button>
       </form>
    );
-   
-   return (
+   return(
       
     
-          <div style = {{display: "flex", flexDirection: "column",
-           alignItems: "center",
-           justifyContent: "center"}}>
-           
-             <h1>Already Have An Account?!</h1> 
-             <Button variant="contained" color="secondary" onClick = {CustomerRender}>Customer Registation</Button>
-             {customerRegisterShown ? customerForm : null }
-             <Button variant="contained" color="secondary" onClick = {BookingAgentRender}>Booking Agent Registration</Button>
-             {bookingAgentRegisterShown ? baForm : null }
-             <Button variant="contained" color="secondary" onClick = {AirlineRender}>Airline Staff Registration</Button>
-             {airlineRegisterShown ? airLineForm : null }
-          </div>
-       );
+      <div style = {{display: "flex", flexDirection: "column",
+       alignItems: "center",
+       justifyContent: "center"}}>
+       
+         <h1>Already Have An Account?!</h1> 
+         <Button variant="contained" color="secondary" onClick = {CustomerRender}>Customer Registation</Button>
+         {customerRegisterShown ? customerForm : null }
+         <Button variant="contained" color="secondary" onClick = {BookingAgentRender}>Booking Agent Registration</Button>
+         {bookingAgentRegisterShown ? baForm : null }
+         <Button variant="contained" color="secondary" onClick = {AirlineRender}>Airline Staff Registration</Button>
+         {airlineRegisterShown ? airLineForm : null }
+      </div>
+   );
 }
+ 
    
 
 

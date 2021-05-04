@@ -4,8 +4,7 @@ import React, { useMemo, useState, useEffect } from "react"
 
 function Table(props)
 {
-  //const [data, setData] = useState();
-  //useEffect(() => {setData(props.data)},[]);
+
   return(
     <div>
     {props.data && 

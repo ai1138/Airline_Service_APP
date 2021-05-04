@@ -23,12 +23,12 @@ class App extends Component {
              <Route path="/userhome" component={Userhome}/>
              <Route path="/bookingagent" component={Bookingagent}/>
              <Route path="/airlinestaff" component={Airlinestaff}/>
-			 <Route path= "/BookingAgentFormPage" component={BookingAgentFormPage}/>
-	         <Route path= "/lspage" component={lspage}/>
-			<Route path= "/registerPage" component={registerpage}/>
-			<Route path= "/ASregister" component={ASRegister}/>
-			<Route path= "/BAregister" component={BARegister}/>
-           </Switch>
+             <Route path= "/BookingAgentFormPage" component={BookingAgentFormPage}/>
+             <Route path= "/lspage" component={lspage}/>
+             <Route path= "/registerPage" component={registerpage}/>
+             <Route path= "/ASregister" component={ASRegister}/>
+             <Route path= "/BAregister" component={BARegister}/>
+       </Switch>
       </div>
       </BrowserRouter>
     )

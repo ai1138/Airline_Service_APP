@@ -49,6 +49,7 @@ function Lspage () {
       Password
       <input type="text" password="password" />
       </form>
+   
 
    );
    
@@ -59,13 +60,13 @@ function Lspage () {
            alignItems: "center",
            justifyContent: "center"}}>
            
-             <h1>Already Have An Account?!</h1> 
+             <h1>Already Have An Account?! Click the type you need!</h1> 
              <tr>At your convenience, anytime, anywhere</tr>
-             <Button variant="contained" color="secondary" onClick = {CustomerRender}>Customer Log In</Button>
+             <Button variant="contained" color="secondary" onClick = {CustomerRender}>Customer </Button>
              {customerLoginShown ? customerLogin : null }
-             <Button variant="contained" color="secondary" onClick = {BookingRender}>Booking Agent Log In</Button>
+             <Button variant="contained" color="secondary" onClick = {BookingRender}>Booking Agent </Button>
 	   		 {baLoginShown ? bookingagentLogin : null }
-             <Button variant="contained" color="secondary" onClick = {AirlineRender}>Airline Staff Log In</Button>
+             <Button variant="contained" color="secondary" onClick = {AirlineRender}>Airline Staff </Button>
 	   		 {airlineLoginShown ? airlinestaffLogin : null }
              <Button variant="contained" color="secondary" href= './registerPage'>Register!</Button>
              {/* <SearchPage/>

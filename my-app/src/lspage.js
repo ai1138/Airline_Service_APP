@@ -15,6 +15,12 @@ function Lspage () {
    {
       setCustomerLoginShown(!customerLoginShown);
    }
+   const BookingRender = (props) => {
+	   setBaLoginShown(!baLoginShown);
+   }
+   const AirlineRender = (props) => {
+	   setAirLineLoginShown(!airlineLoginShown);
+   }
    const customerLogin =  
    (
       <form>
@@ -25,28 +31,26 @@ function Lspage () {
       </form>
 
    );
-   const bookingagentRender = () => {
-      return (
-         <form>
-          Email:
-         <input type="text" email="email" />
-         Password
-         <input type="text" password="password" />
-         </form>
-   
-      )
-   }
-   const airlinestaffRender = () => {
-      return (
-         <form>
-          Email:
-         <input type="text" email="email" />
-         Password
-         <input type="text" password="password" />
-         </form>
-   
-      )
-   }
+  const bookingagentLogin =  
+   (
+      <form>
+       Email:
+      <input type="text" email="email" />
+      Password
+      <input type="text" password="password" />
+      </form>
+
+   );
+  const airlinestaffLogin =  
+   (
+      <form>
+       Email:
+      <input type="text" email="email" />
+      Password
+      <input type="text" password="password" />
+      </form>
+
+   );
    
    return (
       
@@ -59,8 +63,10 @@ function Lspage () {
              <tr>At your convenience, anytime, anywhere</tr>
              <Button variant="contained" color="secondary" onClick = {CustomerRender}>Customer Log In</Button>
              {customerLoginShown ? customerLogin : null }
-             <Button variant="contained" color="secondary" onClick = {bookingagentRender}>Booking Agent Log In</Button>
-             <Button variant="contained" color="secondary" onClick = {airlinestaffRender}>Airline Staff Log In</Button>
+             <Button variant="contained" color="secondary" onClick = {BookingRender}>Booking Agent Log In</Button>
+	   		 {baLoginShown ? bookingagentLogin : null }
+             <Button variant="contained" color="secondary" onClick = {AirlineRender}>Airline Staff Log In</Button>
+	   		 {airlineLoginShown ? airlinestaffLogin : null }
              <Button variant="contained" color="secondary" href= './FormPage'>REGISTER</Button>
              {/* <SearchPage/>
              <Table /> */}

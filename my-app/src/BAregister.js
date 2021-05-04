@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class MyForm extends React.Component {
+class BARegister extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,12 +26,6 @@ class MyForm extends React.Component {
         name='name'
         onChange={this.myChangeHandler}
       />
-		<p>Enter your date of birth:</p>
-      <input
-        type='text'
-        name='email'
-        onChange={this.myChangeHandler}
-      />
       <p>Enter your email:</p>
       <input
         type='text'
@@ -44,34 +38,10 @@ class MyForm extends React.Component {
         name='password'
         onChange={this.myChangeHandler}
       />
-		<p>Enter your local address:</p>
+		<p>Enter your customers ID:</p>
       <input
         type='text'
         name='address'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your phone number:</p>
-      <input
-        type='text'
-        name='age'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your passport number:</p>
-      <input
-        type='text'
-        name='age'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your passport expiration date:</p>
-		<input
-        type='text'
-        name='age'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your passport country:</p>
-		<input
-        type='text'
-        name='age'
         onChange={this.myChangeHandler}
       />
       </form>
@@ -79,6 +49,6 @@ class MyForm extends React.Component {
   }
 }
 
-export default MyForm
+export default BARegister
 
-ReactDOM.render(<MyForm />, document.getElementById('root'));
+ReactDOM.render(<BARegister />, document.getElementById('root'));

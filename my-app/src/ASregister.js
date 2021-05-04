@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class MyForm extends React.Component {
+class ASRegister extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,46 +32,22 @@ class MyForm extends React.Component {
         name='email'
         onChange={this.myChangeHandler}
       />
-      <p>Enter your email:</p>
+      <p>Enter your phone number:</p>
       <input
         type='text'
         name='email'
         onChange={this.myChangeHandler}
       />
-		<p>Enter your password:</p>
+		<p>Enter your username:</p>
       <input
         type='text'
         name='password'
         onChange={this.myChangeHandler}
       />
-		<p>Enter your local address:</p>
+		<p>Enter your password:</p>
       <input
         type='text'
         name='address'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your phone number:</p>
-      <input
-        type='text'
-        name='age'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your passport number:</p>
-      <input
-        type='text'
-        name='age'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your passport expiration date:</p>
-		<input
-        type='text'
-        name='age'
-        onChange={this.myChangeHandler}
-      />
-		<p>Enter your passport country:</p>
-		<input
-        type='text'
-        name='age'
         onChange={this.myChangeHandler}
       />
       </form>
@@ -79,6 +55,6 @@ class MyForm extends React.Component {
   }
 }
 
-export default MyForm
+export default ASRegister
 
-ReactDOM.render(<MyForm />, document.getElementById('root'));
+ReactDOM.render(<ASRegister />, document.getElementById('root'));

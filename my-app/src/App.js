@@ -7,10 +7,9 @@ import Userhome from './userhome';
 import Bookingagent from './bookingagent';
 import Navigation from './navigation';
 import Airlinestaff from './airlinestaff'
-import FormPage from './FormPage';
 import BookingAgentFormPage from './BookingAgentFormPage';
 import lspage from './lspage';
-import registerpage from './main_register_page';
+import registerpage from './registerPage';
 import ASRegister from './ASregister';
 import BARegister from './BAregister';
 
@@ -24,10 +23,9 @@ class App extends Component {
              <Route path="/userhome" component={Userhome}/>
              <Route path="/bookingagent" component={Bookingagent}/>
              <Route path="/airlinestaff" component={Airlinestaff}/>
-			 <Route path="/FormPage" component={FormPage}/>
 			 <Route path= "/BookingAgentFormPage" component={BookingAgentFormPage}/>
 	         <Route path= "/lspage" component={lspage}/>
-			<Route path= "/main_register_page" component={registerpage}/>
+			<Route path= "/registerPage" component={registerpage}/>
 			<Route path= "/ASregister" component={ASRegister}/>
 			<Route path= "/BAregister" component={BARegister}/>
            </Switch>

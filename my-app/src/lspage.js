@@ -3,8 +3,7 @@ import Table from './Table'
 import SearchPage from './SearchPage'
 import {button} from "./button";
 import Button from '@material-ui/core/Button';
-import FormPage from './FormPage'
-import registerpage from './main_register_page'
+import registerpage from './registerPage'
 
 
 function Lspage () {
@@ -68,7 +67,7 @@ function Lspage () {
 	   		 {baLoginShown ? bookingagentLogin : null }
              <Button variant="contained" color="secondary" onClick = {AirlineRender}>Airline Staff Log In</Button>
 	   		 {airlineLoginShown ? airlinestaffLogin : null }
-             <Button variant="contained" color="secondary" href= './main_register_page'>Register!</Button>
+             <Button variant="contained" color="secondary" href= './registerPage'>Register!</Button>
              {/* <SearchPage/>
              <Table /> */}
           </div>

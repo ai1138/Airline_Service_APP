@@ -3,12 +3,29 @@ import Table from './Table'
 import SearchPage from './SearchPage'
 import {button} from "./button";
 import Button from '@material-ui/core/Button';
-import FormPage from './FormPage'
 
 
-function registerpage () 
+
+function Registerpage () 
 {
    const [customerRegisterShown,setCustomerRegisterShown] = useState(false);
+   const [bookingAgentRegisterShown,setBookingAgentRegisterShown] = useState(false);
+   const [airlineRegisterShown,setAirlineRegisterShown] = useState(false);
+   const CustomerRender = (props) => 
+   {
+      setCustomerRegisterShown(!customerRegisterShown);
+   }
+   const BookingAgentRender = (props) => 
+   {
+      setBookingAgentRegisterShown(!bookingAgentRegisterShown);
+   }
+   const AirlineRender = (props) => 
+   {
+      setAirlineRegisterShown(!airlineRegisterShown);
+   }
+   const customerForm = (
+      <div>i work yay</div>
+   );
  
    
    return (
@@ -20,11 +37,10 @@ function registerpage ()
            
              <h1>Already Have An Account?!</h1> 
              <tr>At your convenience, anytime, anywhere</tr>
-             <Button variant="contained" color="secondary" href= './FormPage'>Customer Registation</Button>
-             <Button variant="contained" color="secondary" href= './BAregister'>Booking Agent Registration</Button>
-             <Button variant="contained" color="secondary" href= './ASregister'>Airline Staff Registration</Button>
-             {/* <SearchPage/>
-             <Table /> */}
+             <Button variant="contained" color="secondary" onClick = {CustomerRender}>Customer Registation</Button>
+             {customerRegisterShown ? customerForm : null }
+             <Button variant="contained" color="secondary" onClick = {BookingAgentRender}>Booking Agent Registration</Button>
+             <Button variant="contained" color="secondary" onClick = {AirlineRender}>Airline Staff Registration</Button>
           </div>
        );
 }
@@ -33,4 +49,4 @@ function registerpage ()
 
 
 
-export default registerpage;
+export default Registerpage;

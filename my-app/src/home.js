@@ -59,13 +59,35 @@ function Home()
     );
     const cusPage = (
        <div>  heyyy</div>
-    )
+   )
+
+
+
+
+
+
+
     const baPage = (
       <div>  heyyy</div>
    )
+
+
+
+
+
    const airPage = (
       <div>  heyyy</div>
    )
+
+
+
+
+
+
+
+
+
+
     return (
       <div>
          <Button style = {{marginTop: '5px', width: '5%'}} variant="contained" color="secondary" onClick = {noLoginRender}>default </Button>

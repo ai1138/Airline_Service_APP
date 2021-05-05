@@ -45,14 +45,21 @@ function Registerpage ()
    const CustomerRender = (props) => 
    {
       setCustomerRegisterShown(!customerRegisterShown);
+      setBookingAgentRegisterShown(false);
+      setAirlineRegisterShown(false);
    }
    const BookingAgentRender = (props) => 
    {
       setBookingAgentRegisterShown(!bookingAgentRegisterShown);
+      setCustomerRegisterShown(false);
+      setAirlineRegisterShown(false);
    }
    const AirlineRender = (props) => 
    {
       setAirlineRegisterShown(!airlineRegisterShown);
+      setCustomerRegisterShown(false);
+      setBookingAgentRegisterShown(false);
+
    }
    const submitCustomerForm = () =>
    {
@@ -286,12 +293,20 @@ function Registerpage ()
        justifyContent: "center"}}>
          <img src = {logo} alt = "Logo" height="200" width="200" />
          <h1>Already Have An Account?!</h1> 
-         <Button variant="contained" color="secondary" onClick = {CustomerRender}>Customer Registation</Button>
-         {customerRegisterShown ? customerForm : null }
-         <Button variant="contained" color="secondary" onClick = {BookingAgentRender}>Booking Agent Registration</Button>
-         {bookingAgentRegisterShown ? baForm : null }
-         <Button variant="contained" color="secondary" onClick = {AirlineRender}>Airline Staff Registration</Button>
-         {airlineRegisterShown ? airLineForm : null }
+         <div style = {{display: 'flex', direction: 'row', width: '800px', alignItems: 'center'}}>
+            <div style = {{display: 'flex', width: `${customerRegisterShown || bookingAgentRegisterShown || airlineRegisterShown ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
+               <Button style = {{marginTop: '10px', width:'50%'}} variant="contained" color="secondary" onClick = {CustomerRender}>Customer Registation</Button>
+               <Button style = {{marginTop: '10px', width:'50%'}} variant="contained" color="secondary" onClick = {BookingAgentRender}>Booking Agent Registration</Button>
+               <Button style = {{marginTop: '10px', width:'50%'}} variant="contained" color="secondary" onClick = {AirlineRender}>Airline Staff Registration</Button>
+            </div>
+            <div style = {{display: 'flex', width: `${customerRegisterShown || bookingAgentRegisterShown || airlineRegisterShown ? '50%' : '0px'}`, alignItems: 'center'}}>
+               {customerRegisterShown ? customerForm : null }
+               {bookingAgentRegisterShown ? baForm : null }
+               {airlineRegisterShown ? airLineForm : null }
+
+            </div>
+         </div>
+
       </div>
    );
 }

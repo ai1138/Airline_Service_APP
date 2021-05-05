@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom'
 import Table from './Table'
 import SearchPage from './SearchPage'
@@ -8,7 +8,12 @@ import logo from './PngItem_61922.png';
 
 
  
-const home = () => {
+function Home()
+{   
+    const [noLogin,setNoLogin] = useState(false);
+    const [userLogin, setUserLogin] = useState(false);
+    const [bookingAgentLogin, setBookingAgentLogin] = useState(false);
+    const [airLineLogin, setAirLineLogin] = useState(false);
     return (
 	
  
@@ -25,5 +30,5 @@ const home = () => {
 }
 
 
-export default home;
+export default Home;
 

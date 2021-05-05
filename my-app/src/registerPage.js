@@ -3,6 +3,7 @@ import Table from './Table'
 import SearchPage from './SearchPage'
 import {button} from "./button";
 import Button from '@material-ui/core/Button';
+import logo from './PngItem_61922.png';
 
 
 
@@ -283,7 +284,7 @@ function Registerpage ()
       <div style = {{display: "flex", flexDirection: "column",
        alignItems: "center",
        justifyContent: "center"}}>
-       
+         <img src = {logo} alt = "Logo" height="200" width="200" />
          <h1>Already Have An Account?!</h1> 
          <Button variant="contained" color="secondary" onClick = {CustomerRender}>Customer Registation</Button>
          {customerRegisterShown ? customerForm : null }

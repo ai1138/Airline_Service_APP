@@ -3,7 +3,8 @@ import Table from './Table'
 import SearchPage from './SearchPage'
 import {button} from "./button";
 import Button from '@material-ui/core/Button';
-import registerpage from './registerPage'
+import registerpage from './registerPage';
+import logo from './PngItem_61922.png';
 
 
 function Lspage () {
@@ -100,6 +101,7 @@ function Lspage () {
    (
       <div>
          <form>
+
             <p>Username:</p>
             <input
             type='text'
@@ -149,7 +151,7 @@ function Lspage () {
           <div style = {{display: "flex", flexDirection: "column",
            alignItems: "center",
            justifyContent: "center"}}>
-           
+            <img src = {logo} alt = "Logo" height="200" width="200" />
              <h1>Already Have An Account?! Click the type you need!</h1> 
              <tr>At your convenience, anytime, anywhere</tr>
              <div style = {{display: 'flex', direction: 'row', width: '800px', alignItems: 'center'}}>

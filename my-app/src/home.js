@@ -9,7 +9,8 @@ import logo from './PngItem_61922.png';
 
  
 function Home()
-{   
+{   loginState = "customer" //make loginState be either customer,bookingagent or airline and render the page according to state 
+      //if loginState is "" that means no one loged in
     const [noLogin,setNoLogin] = useState(false);
     const [userLogin, setUserLogin] = useState(false);
     const [bookingAgentLogin, setBookingAgentLogin] = useState(false);

@@ -6,7 +6,10 @@ import home from './home';
 import Navigation from './navigation';
 import lspage from './lspage';
 import registerpage from './registerPage';
-import FlightManagement from './FlightManagement'
+import FlightManagement from './FlightManagement';
+import CustomerPortal from './CustomerPortal';
+import SearchPage from './SearchPage';
+import Table from "./Table";
 
 
 class App extends Component {
@@ -19,6 +22,9 @@ class App extends Component {
              <Route path= "/lspage" component={lspage}/>
              <Route path= "/registerPage" component={registerpage}/>
              <Route path= "/FlightManagement" component={FlightManagement}/>
+			 <Route path= "/CustomerPortal" component={CustomerPortal}/>
+			<Route path= "/SearchPage" component={SearchPage}/>
+			<Route path= "/Table" component={Table}/>
        </Switch>
       </div>
       </BrowserRouter>

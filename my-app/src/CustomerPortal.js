@@ -12,6 +12,7 @@ import Navigation from './navigation';
 function CustomerPortal()
 {
    const [PurchaseNewTickets, setNewTicket] = useState(false);
+   const [NewRating, setNewRating] = useState(false);
    const [NewAirplaneShown,setNewAirplane] = useState(false);
    const [NewAirportShown,setNewAirport] = useState(false);
    const [NewFlightShown,setNewFlight] = useState(false);
@@ -56,10 +57,13 @@ function CustomerPortal()
    }
    const PurchaseTicketRender = (props) => {
       setNewTicket(!PurchaseNewTickets);
-	    setNewAirplane(false);
-      setNewAirport(false);
-	   setNewFlight(false);
-      console.log("airline");
+	  setNewRating(false);
+      console.log("tickets");
+   }
+   const CommentRatingRender = (props) => {
+	   setNewRating(!NewRating);
+	   setNewTicket(false);
+	   console.log("rating");
    }
    const submitNewAirportForm = () =>
    { //this is for the airport form, this is what happens when we
@@ -111,45 +115,56 @@ function CustomerPortal()
                                        console.log("naw")
                                     }
    }
-
-   const submitNewTicketForm = () =>
-   { //this is for the flightstatus
-      if(flightnumstatus !== "")
-         if(newflightstatus !== "")
-         {
-            console.log("yeee")
-         }
-         else
-         {
-            console.log("naw")
-         }
+   const submitNewCommentRateForm = () => {
+	   if (airplaneID !== "") {
+		   if (flightNum !== "") {
+			   if (idNum !== "") {
+				   console.log("valid airplane")
+			   }
+			   else {
+				   console.log("no valid id num")
+			   }
+		   }
+		   else {
+			   console.log("no valid flight num")
+		   }
+	   }
+	   else {
+		   console.log("no valid airplane")
+	   }
+   }
+   const submitNewTicketForm = () => { //this is for the new tickets
+      if(flightNum !== "") {
+         if(idNum !== "") {
+			 console.log("NEW TICKET INSERTED!")
+		 }
+	  }
    }
 
 
-   const NewAirportForm = ( //this is the actual form construction
+   const CommentRating = ( //this is the actual form construction
       <div>
-	   <SearchPage/>
          <form>
-            <p>Add New Airport Name:</p>
+            <p>Airplane ID:</p>
             <input
             type='text'
             name='name'
-            value={airportName}
-            onChange={(e) => setAirportName(e.target.value)}
+            value={airplaneID}
+            onChange={(e) => setAirplaneID(e.target.value)}
             />
-            <p>Airline ID:</p>
+            <p>Flight Number:</p>
             <input 
             type='text'
             name='name'
-            value={airlineID}
-            onChange={(e) => setAirlineID(e.target.value)}
+            value={flightNum}
+            onChange={(e) => setFlightNum(e.target.value)}
             />
-            <p> City:</p>
+            <p> Confirm Customer ID:</p>
             <input
             type='text'
             name='name'
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
+            value={idNum}
+            onChange={(e) => setIDNum(e.target.value)}
             />
          </form>
          <Button variant="contained" color="blue" onClick = {submitNewTicketForm}>submit</Button>
@@ -289,8 +304,16 @@ function CustomerPortal()
             <input
             type='text'
             name='name'
-            value={flightnumstatus}
-            onChange={(e) => setflightnumstatus(e.target.value)}
+            value={flightNum}
+            onChange={(e) => setFlightNum(e.target.value)}
+            />
+            </p>
+			<p>Confirm Customer ID Num:
+            <input
+            type='text'
+            name='name'
+            value={idNum}
+            onChange={(e) => setIDNum(e.target.value)}
             />
             </p>
          </form>
@@ -305,24 +328,21 @@ function CustomerPortal()
       <h1> Customer Portal! </h1>
       <div style = {{display: 'flex', direction: 'row', width: '800px', alignItems: 'center'}}>
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewFlightShown || NewAirplaneShown || NewAirportShown ? '50%' : '100%'}`,  alignItems: 'right', flexDirection: 'column'}}>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Flights </Button>
+         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null} href = './Table'> View Flights </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href= './SearchPage'> Search For Flights </Button>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> Give Ratings </Button>
 		<Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> Track My Spending </Button>
 
          
       </div>
-      <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewFlightShown || NewAirplaneShown || NewAirportShown ? '50%' : '100%'}`,  alignItems: 'right', flexDirection: 'column'}}>
+      <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating|| NewAirplaneShown || NewAirportShown ? '50%' : '100%'}`,  alignItems: 'right', flexDirection: 'column'}}>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {PurchaseTicketRender}> Purchase Tickets </Button>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {FlightRender}> Add New Flight </Button>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {AirplaneRender}> Add New Airline </Button>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {AirportRender}> Add New Airport </Button>
+<Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {CommentRatingRender}> Give Ratings </Button>
       </div>
-      <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewFlightShown || NewAirplaneShown || NewAirportShown ? '50%' : '0px'}`, alignItems: 'center'}}>
+      <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating|| NewAirplaneShown || NewAirportShown ? '50%' : '0px'}`, alignItems: 'center'}}>
          {PurchaseNewTickets ? PurchaseTickets: null }    
-         {NewFlightShown ? NewFlightForm : null }
+         {NewRating ? CommentRating : null }
          {NewAirplaneShown ? NewAirplaneForm : null }
-         {NewAirportShown ? NewAirportForm: null }
+
           
       </div>
       </div> 

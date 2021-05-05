@@ -16,12 +16,21 @@ function Lspage () {
    const CustomerRender = (props) => 
    {
       setCustomerLoginShown(!customerLoginShown);
+      setBaLoginShown(false);
+      setAirLineLoginShown(false);
+      console.log("customer")
    }
    const BookingRender = (props) => {
 	   setBaLoginShown(!baLoginShown);
+      setCustomerLoginShown(false);
+      setAirLineLoginShown(false);
+      console.log("ba");
    }
    const AirlineRender = (props) => {
 	   setAirLineLoginShown(!airlineLoginShown);
+      setCustomerLoginShown(false);
+      setBaLoginShown(false);
+      console.log("airline");
    }
    const submitCustomerForm = () =>
    {
@@ -64,6 +73,7 @@ function Lspage () {
    }
    const customerLogin =  
    (
+
       <div>
          <form>
             <p>Username:</p>

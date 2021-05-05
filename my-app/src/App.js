@@ -18,7 +18,7 @@ class App extends Component {
              <Route path="/" component={home} exact/>
              <Route path= "/lspage" component={lspage}/>
              <Route path= "/registerPage" component={registerpage}/>
-             <Route path= "./FlightManagement" component={FlightManagement}/>
+             <Route path= "/FlightManagement" component={FlightManagement}/>
        </Switch>
       </div>
       </BrowserRouter>

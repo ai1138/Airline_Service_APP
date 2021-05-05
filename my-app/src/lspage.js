@@ -19,7 +19,6 @@ function Lspage () {
       setCustomerLoginShown(!customerLoginShown);
       setBaLoginShown(false);
       setAirLineLoginShown(false);
-<<<<<<< Updated upstream
       console.log("customer")
    }
    const BookingRender = (props) => {
@@ -33,18 +32,6 @@ function Lspage () {
       setCustomerLoginShown(false);
       setBaLoginShown(false);
       console.log("airline");
-=======
-   }
-   const BookingRender = (props) => {
-      setBaLoginShown(!baLoginShown);
-      setCustomerLoginShown(false);
-      setAirLineLoginShown(false);
-   }
-   const AirlineRender = (props) => {
-      setAirLineLoginShown(!airlineLoginShown);
-      setCustomerLoginShown(false);
-      setBaLoginShown(false);
->>>>>>> Stashed changes
    }
    const submitCustomerForm = () =>
    {

@@ -11,6 +11,8 @@ function Lspage () {
    const [customerLoginShown,setCustomerLoginShown] = useState(false);
    const [baLoginShown,setBaLoginShown] = useState(false);
    const [airlineLoginShown,setAirLineLoginShown] = useState(false);
+   const [username, setUserName] = useState("");
+   const [password, setPassWord] = useState("");
    const CustomerRender = (props) => 
    {
       setCustomerLoginShown(!customerLoginShown);
@@ -21,34 +23,112 @@ function Lspage () {
    const AirlineRender = (props) => {
 	   setAirLineLoginShown(!airlineLoginShown);
    }
+   const submitCustomerForm = () =>
+   {
+      if(username !=="")
+         if(password !== "")
+         {
+            console.log("yeee")
+         }
+         else
+         {
+            console.log("naw")
+         }
+   }
+   const submitBookingAgentForm = () =>
+   {
+      if(username !=="")
+         if(password !== "")
+         {
+            fetch(`http://localhost:5000/login/${username}/${password}`, {
+               method: 'GET',
+               headers: {'Content-Type': 'appication/json'}
+              }).then(res => console.log(res))
+         }
+         else
+         {
+            console.log("naw")
+         }
+   }
+   const submitAirLineForm = () =>
+   {
+      if(username !=="")
+         if(password !== "")
+         {
+            console.log("yeee")
+         }
+         else
+         {
+            console.log("naw")
+         }
+   }
    const customerLogin =  
    (
-      <form>
-       Email:
-      <input type="text" email="email" />
-      Password
-      <input type="text" password="password" />
-      </form>
+      <div>
+         <form>
+            <p>Username:</p>
+            <input
+            type='text'
+            name='email'
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
+            />
+            <p>Password:</p>
+            <input
+            type='text'
+            name='password'
+            value={password}
+            onChange={(e) => setPassWord(e.target.value)}
+            />
+         </form>
+         <Button variant="contained" color="blue" onClick = {submitCustomerForm}>submit</Button>
+      </div>
+      
 
    );
   const bookingagentLogin =  
    (
-      <form>
-       Email:
-      <input type="text" email="email" />
-      Password
-      <input type="text" password="password" />
-      </form>
-
+      <div>
+         <form>
+            <p>Username:</p>
+            <input
+            type='text'
+            name='email'
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
+            />
+            <p>Password:</p>
+            <input
+            type='text'
+            name='password'
+            value={password}
+            onChange={(e) => setPassWord(e.target.value)}
+            />
+         </form>
+         <Button variant="contained" color="blue" onClick = {submitBookingAgentForm}>submit</Button>
+      </div>
    );
   const airlinestaffLogin =  
    (
-      <form>
-       Email:
-      <input type="text" email="email" />
-      Password
-      <input type="text" password="password" />
-      </form>
+      <div>
+         <form>
+            <p>Username:</p>
+            <input
+            type='text'
+            name='email'
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
+            />
+            <p>Password:</p>
+            <input
+            type='text'
+            name='password'
+            value={password}
+            onChange={(e) => setPassWord(e.target.value)}
+            />
+         </form>
+         <Button variant="contained" color="blue" onClick = {submitAirLineForm}>submit</Button>
+      </div>
    
 
    );

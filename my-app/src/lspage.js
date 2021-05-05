@@ -62,13 +62,23 @@ function Lspage () {
            
              <h1>Already Have An Account?! Click the type you need!</h1> 
              <tr>At your convenience, anytime, anywhere</tr>
-             <Button variant="contained" color="secondary" onClick = {CustomerRender}>Customer </Button>
-             {customerLoginShown ? customerLogin : null }
-             <Button variant="contained" color="secondary" onClick = {BookingRender}>Booking Agent </Button>
-	   		 {baLoginShown ? bookingagentLogin : null }
-             <Button variant="contained" color="secondary" onClick = {AirlineRender}>Airline Staff </Button>
-	   		 {airlineLoginShown ? airlinestaffLogin : null }
-             <Button variant="contained" color="secondary" href= './registerPage'>Register!</Button>
+             <div style = {{display: 'flex', direction: 'row', width: '800px', alignItems: 'center'}}>
+                <div style = {{display: 'flex', width: `${customerLoginShown || baLoginShown || airlineLoginShown ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
+                  <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {CustomerRender}>Customer </Button>
+                  <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {BookingRender}>Booking Agent </Button>
+                  <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {AirlineRender}>Airline Staff </Button>
+                  <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href= './registerPage'>Register!</Button>
+                </div>
+                <div style = {{display: 'flex', width: `${customerLoginShown || baLoginShown || airlineLoginShown ? '50%' : '0px'}`, alignItems: 'center'}}>
+                  {customerLoginShown ? customerLogin : null }
+                  {baLoginShown ? bookingagentLogin : null }
+                  {airlineLoginShown ? airlinestaffLogin : null }
+                </div>
+
+
+             </div>
+
+             
              {/* <SearchPage/>
              <Table /> */}
           </div>

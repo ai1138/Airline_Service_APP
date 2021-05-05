@@ -64,6 +64,70 @@ function FlightManagement()
       setFlightStatus(!FlightStatusShown);
       console.log("airline");
    }
+   const submitNewAirportForm = () =>
+   {
+      if(airportName !=="")
+         if(airlineID!== "")
+            if(city!=="")
+            {
+               console.log("yeee")
+            }
+            else
+            {
+               console.log("naw")
+            }
+   }
+   
+   const submitNewAirplaneForm = () =>
+   {
+      if(airplaneName !=="")
+         if(numofSeats !== "")
+            if(airplaneID !== "")
+            {
+               console.log("yeee")
+            }
+            else
+            {
+               console.log("naw")
+            }
+   }
+
+   const submitNewFlightForm = () =>
+   {
+      if(flightNum !=="")
+         if(flightStat !== "")
+            if(departureDate !== "")
+               if(departureTime !== "")
+                  if(flightairlineID!== "")
+                     if(departureAirport !== "")
+                        if(arrivalAirport !== "")
+                           if(arrivalDate !== "")
+                              if(arrivalTime !== "")
+                                 if(basePrice !== "")
+                                    if(idNum !== "")
+                                    {
+                                       console.log("yeee")
+                                    }
+                                    else
+                                    {
+                                       console.log("naw")
+                                    }
+   }
+
+   const submitFlightStatusForm = () =>
+   {
+      if(flightnumstatus !=="")
+         if(newflightstatus !== "")
+         {
+            console.log("yeee")
+         }
+         else
+         {
+            console.log("naw")
+         }
+   }
+
+
    const NewAirportForm = (
       <div>
          <form>
@@ -71,7 +135,7 @@ function FlightManagement()
             <input
             type='text'
             name='name'
-            value={airportName} //need to make a usestate for value and onchange once everything is collabed!
+            value={airportName}
             onChange={(e) => setAirportName(e.target.value)}
             />
             <p>Airline ID:</p>
@@ -89,7 +153,7 @@ function FlightManagement()
             onChange={(e) => setCity(e.target.value)}
             />
          </form>
-         <Button variant="contained" color="blue">submit</Button>
+         <Button variant="contained" color="blue" onClick = {submitNewAirportForm}>submit</Button>
       </div>
    );
    const NewAirplaneForm = (
@@ -120,7 +184,7 @@ function FlightManagement()
             />
             </p>
          </form>
-         <Button variant="contained" color="blue">submit</Button>
+         <Button variant="contained" color="blue" onClick = {submitNewAirplaneForm}>submit</Button>
       </div>
    );
    const NewFlightForm = (
@@ -215,7 +279,7 @@ function FlightManagement()
             />
             </p>
          </form>
-         <Button variant="contained" color="blue">submit</Button>
+         <Button variant="contained" color="blue" onCick = {submitNewFlightForm}>submit</Button>
       </div>
    );
    const FlightStatus = (
@@ -238,7 +302,7 @@ function FlightManagement()
             />
             </p>
          </form>
-         <Button variant="contained" color="blue">submit</Button>
+         <Button variant="contained" color="blue" onClick = {submitFlightStatusForm}>submit</Button>
       </div>
    );
    

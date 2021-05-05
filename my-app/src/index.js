@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Home from './home';
 import Lspage from './lspage';
 import SearchBar from './SearchBar';
+import FlightManagement from './FlightManagement'
 
 
 <BrowserRouter>
@@ -14,6 +15,7 @@ import SearchBar from './SearchBar';
                 <Route path="/" component={Home} exact/>
                 <Route path= "/lspage" component={Lspage}/>
                 <Route path= "./SearchBar" component={SearchBar}/>
+                <Route path= './FlightManagement' component={FlightManagement}/>
             </Switch>
         </div> 
 </BrowserRouter>

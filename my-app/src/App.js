@@ -6,6 +6,7 @@ import home from './home';
 import Navigation from './navigation';
 import lspage from './lspage';
 import registerpage from './registerPage';
+import FlightManagement from './FlightManagement'
 
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
              <Route path="/" component={home} exact/>
              <Route path= "/lspage" component={lspage}/>
              <Route path= "/registerPage" component={registerpage}/>
+             <Route path= "./FlightManagement" component={FlightManagement}/>
        </Switch>
       </div>
       </BrowserRouter>

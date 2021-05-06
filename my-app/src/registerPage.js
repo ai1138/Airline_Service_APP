@@ -46,16 +46,14 @@ function Registerpage ()
       "airline" : airline,
       "dob" : dob,
       "phoneNumber": phoneNumber,
-<<<<<<< HEAD
-      "address":addy
-=======
+      "address":addy,
+
       "street": street,
       "city":city,
       "state":state,
       "passport num": passportNum,
       "passport expiration": passportExpiration,
       "passport country": passportCountry
->>>>>>> 588ae321005ffb5fc4e9091f5f5821acd0a57b9c
 
    };
    const alert = (

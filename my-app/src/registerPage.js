@@ -25,6 +25,13 @@ function Registerpage ()
    const [dob, setDOB] = useState("");
    const [phoneNumber, setPhoneNumber] = useState("");
    const [form,setForm] = useState();
+   const[street, setStreet] = useState("");
+   const[city, setCity] = useState("");
+   const [state, setState] = useState("");
+   const [passportNum, setPassportNum] = useState("");
+   const [passportExpiration, setPassportExpiration] = useState("");
+   const [passportCountry, setPassportCountry] = useState("");
+
 
    const user =
    {
@@ -36,7 +43,13 @@ function Registerpage ()
       "password" : password,
       "airline" : airline,
       "dob" : dob,
-      "phoneNumber": phoneNumber
+      "phoneNumber": phoneNumber,
+      "street": street,
+      "city":city,
+      "state":state,
+      "passport num": passportNum,
+      "passport expiration": passportExpiration,
+      "passport country": passportCountry
 
    };
    const alert = (
@@ -172,6 +185,56 @@ function Registerpage ()
         value={password}
         onChange={(e) => setPassWord(e.target.value)}
       />
+      <p>Enter your building number:</p>
+      <input
+        type='text'
+        name='building num'
+        value={password}
+        onChange={(e) => setPassWord(e.target.value)}
+      />
+      <p>Enter your street:</p>
+      <input
+        type='text'
+        name='street'
+        value={street}
+        onChange={(e) => setStreet(e.target.value)}
+      />
+      <p>Enter your city:</p>
+      <input
+        type='text'
+        name='city'
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+      />
+      <p>Enter your state:</p>
+      <input
+        type='text'
+        name='state'
+        value={state}
+        onChange={(e) => setState(e.target.value)}
+      />
+      <p>Enter your passport number:</p>
+      <input
+        type='text'
+        name='passport num'
+        value={passportNum}
+        onChange={(e) => setPassportNum(e.target.value)}
+      />
+      <p>Enter your passport  date:</p>
+      <input
+        type='text'
+        name='passport expiration'
+        value={passportExpiration}
+        onChange={(e) => setPassportExpiration(e.target.value)}
+      />
+      <p>Enter your passport country:</p>
+      <input
+        type='text'
+        name='passport country'
+        value={passportCountry}
+        onChange={(e) => setPassportCountry(e.target.value)}
+      />
+
       <Button variant="contained" color="blue" onClick = {submitCustomerForm}>submit</Button>
       </form>
    );
@@ -261,7 +324,7 @@ function Registerpage ()
         value={phoneNumber}
         onChange={(e) => setPhoneNumber(e.target.value)}
       />
-      <p>Enter which airline you work for:</p>
+      <p>Enter which airline ID:</p>
       <input
         type='text'
         name='name'

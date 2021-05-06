@@ -62,28 +62,28 @@ function FlightManagement()
       setNewAirport(false);
       setNewFlight(false);
       setFlightStatus(false);
-      console.log("airline");
+      console.log("airplane");
    }
    const AirportRender = (props) => {
 	   setNewAirplane(false);
       setNewAirport(!NewAirportShown);
       setNewFlight(false);
       setFlightStatus(false);
-      console.log("airline");
+      console.log("airport");
    }
    const FlightRender = (props) => {
 	   setNewAirplane(false);
       setNewAirport(false);
       setNewFlight(!NewFlightShown);
       setFlightStatus(false);
-      console.log("airline");
+      console.log("flight");
    }
    const FlightStatusRender = (props) => {
 	   setNewAirplane(false);
       setNewAirport(false);
       setNewFlight(false);
       setFlightStatus(!FlightStatusShown);
-      console.log("airline");
+      console.log("flightStatus");
    }
    const submitNewAirportForm = () =>
    {
@@ -333,7 +333,7 @@ function FlightManagement()
       <img src = {logo} alt = "Logo" height="200" width="200" />
       <h1> Staff Portal </h1>
       <div style = {{display: 'flex', direction: 'row', width: '800px', alignItems: 'center'}}>
-      <div style = {{display: 'flex', width: `${FlightStatusShown || NewFlightShown || NewAirplaneShown || NewAirportShown ? '50%' : '100%'}`,  alignItems: 'right', flexDirection: 'column'}}>
+      <div style = {{display: 'flex', width: `${FlightStatusShown || NewFlightShown || NewAirplaneShown || NewAirportShown ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Flights </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Flight Ratings </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Booking Agents </Button>
@@ -344,7 +344,7 @@ function FlightManagement()
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Top Destinations </Button>
          
       </div>
-      <div style = {{display: 'flex', width: `${FlightStatusShown || NewFlightShown || NewAirplaneShown || NewAirportShown ? '50%' : '100%'}`,  alignItems: 'right', flexDirection: 'column'}}>
+      <div style = {{display: 'flex', width: `${FlightStatusShown || NewFlightShown || NewAirplaneShown || NewAirportShown ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {FlightStatusRender}> Update Flight Status </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {FlightRender}> Add New Flight </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {AirplaneRender}> Add New Airline </Button>

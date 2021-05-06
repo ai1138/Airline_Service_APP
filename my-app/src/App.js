@@ -7,6 +7,7 @@ import Navigation from './navigation';
 import lspage from './lspage';
 import registerpage from './registerPage';
 import FlightManagement from './FlightManagement';
+import CustomerInfo from './CustomerInfo';
 import CustomerPortal from './CustomerPortal';
 import SearchPage from './SearchPage';
 import Table from "./Table";
@@ -23,6 +24,7 @@ class App extends Component {
              <Route path= "/registerPage" component={registerpage}/>
              <Route path= "/FlightManagement" component={FlightManagement}/>
 			 <Route path= "/CustomerPortal" component={CustomerPortal}/>
+       <Route path = "/CustomerInfo" component = {CustomerInfo}/>
 			<Route path= "/SearchPage" component={SearchPage}/>
 			<Route path= "/Table" component={Table}/>
        </Switch>

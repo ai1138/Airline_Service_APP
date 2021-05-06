@@ -50,21 +50,21 @@ def signUp():
     cursor.execute(query,data["user"])
     airRes = cursor.fetchall()
     if(cusRes):
-        return jsonify("user exists try again")
+        return "user exists try again"
     elif(baRes):
-        return jsonify("user exists try again")
+        return "user exists try again"
     elif(airRes):
-        return jsonify("user exists try again")
+        return "user exists try again"
     elif(data["user"]["role"] == "customer"):
         query = 'INSERT INTO customer(email, customer_id, username, first_name,last_name,passwords, address, phone_number, passport_number, passport_expiration, passport_country, date_of_birth) \
         VALUES (%(email)s,%(id)s,%(username)s,%(firstName)s,%(lastName)s,%(password)s,%(address)s,%(phoneNumber)s,%(passport num)s ,%(passport expiration)s,%(passport country)s,%(dob)s);'
         cursor.execute(query,data["user"])
-        return jsonify("Success")
+        return "Success"
     elif(data["user"]["role"] == "bookingagent"):
         query ='INSERT INTO `booking_agent`(`first_name`, `last_name`, `username`, `email`, `passwords`, `booking_agent_id`, `customer_id`) \
         VALUES(%(firstName)s,%(lastName)s,%(username)s,%(email)s,%(password)s,%(id)s,"")' 
         cursor.execute(query,data["user"])
-        return jsonify("Success")
+        return "Success"
     elif(data["user"]["role"] == "airline"):
         query = 'SELECT * FROM `airline` WHERE `name` = %(airline)s'
         cursor.execute(query,data["user"])
@@ -75,7 +75,7 @@ def signUp():
             query = 'INSERT INTO `airline_staff`(`username`, `airline_id`, `passwords`, `first_name`, `last_name`, `date_of_birth`, `phone_number`) \
             VALUES(%(username)s,%(id)s,%(password)s,%(firstName)s,%(lastName)s,%(dob)s,%(phoneNumber)s)'
             cursor.execute(query,data["user"])
-            return jsonify("Success")
+            return "Success"
     return make_response("how did u get here?")
 
 

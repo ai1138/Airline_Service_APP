@@ -4,8 +4,8 @@ import SearchPage from './SearchPage'
 import {button} from "./button";
 import Button from '@material-ui/core/Button';
 import logo from './PngItem_61922.png';
-
-
+import {useHistory} from 'react-router-dom'
+ 
 
 
 function Registerpage () 
@@ -14,7 +14,9 @@ function Registerpage ()
    const [customerRegisterShown,setCustomerRegisterShown] = useState(false);
    const [bookingAgentRegisterShown,setBookingAgentRegisterShown] = useState(false);
    const [airlineRegisterShown,setAirlineRegisterShown] = useState(false);
-   const [errors,setErrors]  = useState("");
+   const [errors,setErrors]  = useState(false);
+   const [regMes,setRegMes] = useState("");
+   const history = useHistory();
    //form states
    const [firstName, setFirstName] = useState("");
    const [lastName, setLastName] = useState("");
@@ -98,11 +100,13 @@ function Registerpage ()
                                     })
                                     .then(res => res.json())
                                     .then(data => {
-                                       console.log('Success:', data);
+                                       setRegMes(data);
+                                       console.log(data)
                                      })
                                      .catch((error) => {
                                        console.error('Error:', error);
                                      });
+                                     
                                  }
       
    }

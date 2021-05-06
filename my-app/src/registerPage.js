@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from './Table'
 import SearchPage from './SearchPage'
 import {button} from "./button";
@@ -24,10 +24,12 @@ function Registerpage ()
    const [airline, setAirLine] = useState("");
    const [dob, setDOB] = useState("");
    const [phoneNumber, setPhoneNumber] = useState("");
+   const [addy, setAddy] = useState("");
    const [form,setForm] = useState();
 
    const user =
    {
+      "id" : "",
       "role" : "",
       "firstName" : firstName,
       "lastName" : lastName,
@@ -36,7 +38,8 @@ function Registerpage ()
       "password" : password,
       "airline" : airline,
       "dob" : dob,
-      "phoneNumber": phoneNumber
+      "phoneNumber": phoneNumber,
+      "address":addy
 
    };
    const alert = (
@@ -63,23 +66,24 @@ function Registerpage ()
    }
    const submitCustomerForm = () =>
    {
-      if(dob !== "")
-         if(phoneNumber !== "")
-            if(firstName !== "")
-               if(lastName !== "")
-                  if(email !== "")
-                     if(username !== "")
-                        if(password !== "")
-                        {
-                           user.role = "customer";
-                           fetch('http://localhost:5000/register', {
-                              method: 'POST',
-                              body: JSON.stringify({ user }),
-                              headers: { 'Content-Type': 'application/json' },
-                           }).then(res => res.json()).then(json => setForm(json.user));
-                           console.log(user);
-                        }
-     
+      if(addy !== "")
+         if(dob !== "")
+            if(phoneNumber !== "")
+               if(firstName !== "")
+                  if(lastName !== "")
+                     if(email !== "")
+                        if(username !== "")
+                           if(password !== "")
+                           {
+                              user.role = "customer";
+                              fetch('http://localhost:5000/register', {
+                                 method: 'POST',
+                                 body: JSON.stringify({ user }),
+                                 headers: { 'Content-Type': 'application/json' },
+                              }).then(res => res.json()).then(json => setForm(json.user));
+                              console.log(user);
+                           }
+      
    }
    const submitBAForm = () =>
    {
@@ -143,6 +147,13 @@ function Registerpage ()
         name='name'
         value={dob}
         onChange={(e) => setDOB(e.target.value)}
+      />
+      <p>Enter your address:</p>
+      <input
+        type='text'
+        name='name'
+        value={addy}
+        onChange={(e) => setAddy(e.target.value)}
       />
       <p>Enter your phone number:</p>
       <input
@@ -285,6 +296,9 @@ function Registerpage ()
       <Button variant="contained" color="blue" onClick = {submitAirLineForm}>submit</Button>
       </form>
    );
+   const errorMessage = (
+      <h1>This user exists please try something else</h1>
+   )
    return(
       
     
@@ -293,6 +307,7 @@ function Registerpage ()
        justifyContent: "center"}}>
          <img src = {logo} alt = "Logo" height="200" width="200" />
          <h1>Already Have An Account?!</h1> 
+
          <div style = {{display: 'flex', direction: 'row', width: '800px', alignItems: 'center'}}>
             <div style = {{display: 'flex', width: `${customerRegisterShown || bookingAgentRegisterShown || airlineRegisterShown ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
                <Button style = {{marginTop: '10px', width:'50%'}} variant="contained" color="secondary" onClick = {CustomerRender}>Customer Registation</Button>

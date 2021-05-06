@@ -8,7 +8,6 @@ import logo from './PngItem_61922.png';
 import Home from './home'
 import Navigation from './navigation';
 
-
 function FlightManagement()
 {
    const [NewAirplaneShown,setNewAirplane] = useState(false);
@@ -35,6 +34,28 @@ function FlightManagement()
    const [flightnumstatus, setflightnumstatus] = useState("");
    const [newflightstatus, setnewflightstatus] = useState("");
 
+
+   const flightstuff = {
+      "airportName": airportName,
+      "airlineID": airlineID,
+      "city": city,
+      "flightNum": flightNum,
+      "flightStat": flightStat,
+      "departureDate": departureDate,
+      "departureTime": departureTime,
+      "flightairlineID": flightairlineID,
+      "departureAirport": departureAirport,
+      "arrivalAirport": arrivalAirport,
+      "arrivalDate": arrivalDate,
+      "arrivalTime": arrivalTime,
+      "basePrice": basePrice,
+      "idNum": idNum,
+      "airplaneName": airplaneName,
+      "numofSeats": numofSeats,
+      "airplaneID": airplaneID,
+      "flightnumstatus": flightnumstatus,
+      "newflightstatus": newflightstatus
+   };
 
    const AirplaneRender = (props) => {
 	   setNewAirplane(!NewAirplaneShown);
@@ -134,21 +155,21 @@ function FlightManagement()
             <p>Add New Airport Name:</p>
             <input
             type='text'
-            name='name'
+            name='airportName'
             value={airportName}
             onChange={(e) => setAirportName(e.target.value)}
             />
             <p>Airline ID:</p>
             <input 
             type='text'
-            name='name'
+            name='airlineID'
             value={airlineID}
             onChange={(e) => setAirlineID(e.target.value)}
             />
             <p> City:</p>
             <input
             type='text'
-            name='name'
+            name='city'
             value={city}
             onChange={(e) => setCity(e.target.value)}
             />
@@ -162,7 +183,7 @@ function FlightManagement()
             <p>New Airplane Name:
             <input
             type='text'
-            name='name'
+            name='airplaneName '
             value={airplaneName}
             onChange={(e) => setAirplaneName(e.target.value)}
             />
@@ -170,7 +191,7 @@ function FlightManagement()
             <p>Number of Seats:
             <input
             type='text'
-            name='name'
+            name='numofSeats'
             value={numofSeats}
             onChange={(e) => setNumofSeats(e.target.value)}
             />
@@ -178,7 +199,7 @@ function FlightManagement()
             <p>Airline ID:
             <input
             type='text'
-            name='name'
+            name='airplaneID'
             value={airplaneID}
             onChange={(e) => setAirplaneID(e.target.value)}
             />
@@ -193,7 +214,7 @@ function FlightManagement()
             <p>Flight Number:
             <input
             type='text'
-            name='name'
+            name='flightNum'
             value={flightNum}
             onChange={(e) => setFlightNum(e.target.value)}
             />
@@ -201,7 +222,7 @@ function FlightManagement()
             <p>Status:
             <input
             type='text'
-            name='name'
+            name='flightStat'
             value={flightStat}
             onChange={(e) => setFlightStat(e.target.value)}
             />
@@ -209,7 +230,7 @@ function FlightManagement()
             <p> Departure Date:
             <input
             type='text'
-            name='name'
+            name='departureDate'
             value={departureDate}
             onChange={(e) => setDepartureDate(e.target.value)}
             />
@@ -217,7 +238,7 @@ function FlightManagement()
             <p> Departure Time:
             <input
             type='text'
-            name='name'
+            name='departureTime'
             value={departureTime}
             onChange={(e) => setDepartureTime(e.target.value)}
             />
@@ -225,7 +246,7 @@ function FlightManagement()
             <p> Airline ID:
             <input
             type='text'
-            name='name'
+            name='flightairlineID'
             value={flightairlineID}
             onChange={(e) => flightsetAirlineID(e.target.value)}
             />
@@ -233,7 +254,7 @@ function FlightManagement()
             <p> Departure Airport:
             <input
             type='text'
-            name='name'
+            name='departureAirport'
             value={departureAirport}
             onChange={(e) => setDepartureAirport(e.target.value)}
             />
@@ -241,7 +262,7 @@ function FlightManagement()
             <p> Arrival Airport:
             <input
             type='text'
-            name='name'
+            name='arrivalAirport'
             value={arrivalAirport}
             onChange={(e) => setArrivalAirport(e.target.value)}
             />
@@ -249,7 +270,7 @@ function FlightManagement()
             <p> Arrival Date:
             <input
             type='text'
-            name='name'
+            name='arrivalDate'
             value={arrivalDate}
             onChange={(e) => setArrivalDate(e.target.value)}
             />
@@ -257,7 +278,7 @@ function FlightManagement()
             <p> Arrival Time:
             <input
             type='text'
-            name='name'
+            name='arrivalTime'
             value={arrivalTime}
             onChange={(e) => setArrivalTime(e.target.value)}
             />
@@ -265,7 +286,7 @@ function FlightManagement()
             <p> Base Price:
             <input
             type='text'
-            name='name'
+            name='basePrice'
             value={basePrice}
             onChange={(e) => setBasePrice(e.target.value)}
             />
@@ -273,7 +294,7 @@ function FlightManagement()
             <p> Identification Number:
             <input
             type='text'
-            name='name'
+            name='idNum'
             value={idNum}
             onChange={(e) => setIDNum(e.target.value)}
             />
@@ -288,7 +309,7 @@ function FlightManagement()
             <p>Flight Number:
             <input
             type='text'
-            name='name'
+            name='flightnumstatus'
             value={flightnumstatus}
             onChange={(e) => setflightnumstatus(e.target.value)}
             />
@@ -296,7 +317,7 @@ function FlightManagement()
             <p>Flight Status:
             <input
             type='text'
-            name='name'
+            name='newflightstatus'
             value={newflightstatus}
             onChange={(e) => setnewflightstatus(e.target.value)}
             />

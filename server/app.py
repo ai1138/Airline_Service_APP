@@ -3,10 +3,18 @@ from flask import jsonify
 from flask import request
 from flask import make_response
 import pymysql.cursors 
-from flask_cors import CORS
-import jwt
+from flask_cors import CORS,cross_origin
+import string
+import random
 app = Flask(__name__)
-CORS(app)
+config = {
+  'ORIGINS': [
+    'http://localhost:3000',  # React
+    'http://127.0.0.1:3000',  # React
+  ],
+}
+
+CORS(app,resources={ r'/*': {'origins': config['ORIGINS']}}, supports_credentials=True)
  
 conn = pymysql.connect(host='localhost',
                        user='root',
@@ -15,30 +23,62 @@ conn = pymysql.connect(host='localhost',
                        charset='utf8mb4',
                        cursorclass=pymysql.cursors.DictCursor)
 
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 @app.route('/login/:id/:passwrd', methods =['GET'])
 def login():
-    userName = request.args.get("id")
-    pw = request.args.get("id")
+    loginInfo = []
     cursor = conn.cursor()
-    query = 'SELECT * FROM `customer` WHERE `email` = ' '"' + userName  + '"' + ' AND `passwords` = ' + '"' + pw  + '""'
+    query = 'SELECT * FROM `customer` WHERE `email` = %s '
     cursor.execute(query)
     data = cursor.fetchall()
     return jsonify(data)
 @app.route('/register',methods =['POST'])
-def signIn():
+def signUp():
+    create_id = id_generator(6)
     data = request.json
-    if(data["user"]["role"] == "customer"):
-        cursor = conn.cursor()
-        query = "INSERT INTO airline_staff(username, airline_id, passwords, first_name, last_name, date_of_birth, phone_number)"
-        cursor.execute(query)
+    data["user"]["id"] = create_id 
+    cursor = conn.cursor()
+    query = 'SELECT * FROM `customer` WHERE `email` = %(email)s AND `username` = %(username)s '
+    cursor.execute(query,data["user"])
+    cusRes = cursor.fetchall()
+    query = 'SELECT * FROM `booking_agent` WHERE `email` = %(email)s AND `username` = %(username)s '
+    cursor.execute(query,data["user"])
+    baRes = cursor.fetchall()
+    query = 'SELECT * FROM `airline_staff` WHERE `username` = %(username)s'
+    cursor.execute(query,data["user"])
+    airRes = cursor.fetchall()
+    if(cusRes):
+        return jsonify("user exists try again")
+    elif(baRes):
+        return jsonify("user exists try again")
+    elif(airRes):
+        return jsonify("user exists try again")
+    elif(data["user"]["role"] == "customer"):
+        query = 'INSERT INTO customer(email, customer_id, username, first_name,last_name,passwords, address, phone_number, passport_number, passport_expiration, passport_country, date_of_birth) \
+        VALUES (%(email)s,%(id)s,%(username)s,%(firstName)s,%(lastName)s,%(password)s,%(address)s,%(phoneNumber)s,%(passport num)s ,%(passport expiration)s,%(passport country)s,%(dob)s);'
+        cursor.execute(query,data["user"])
+        return jsonify("Success")
     elif(data["user"]["role"] == "bookingagent"):
-        pass
-    else:
-        cursor = conn.cursor()
-        query = "INSERT INTO airline_staff(username, airline_id, passwords, first_name, last_name, date_of_birth, phone_number)"
-        q2  = "VALUES ('he245','1234','abedmusic','abed','islam','2000-10-11','5165246789');"
-        cursor.execute(query)
+        query ='INSERT INTO `booking_agent`(`first_name`, `last_name`, `username`, `email`, `passwords`, `booking_agent_id`, `customer_id`) \
+        VALUES(%(firstName)s,%(lastName)s,%(username)s,%(email)s,%(password)s,%(id)s,"")' 
+        cursor.execute(query,data["user"])
+        return jsonify("Success")
+    elif(data["user"]["role"] == "airline"):
+        query = 'SELECT * FROM `airline` WHERE `name` = %(airline)s'
+        cursor.execute(query,data["user"])
+        lineRes = cursor.fetchall()
+        if(not lineRes):
+            return "error airline doesnt exist"
+        else:
+            query = 'INSERT INTO `airline_staff`(`username`, `airline_id`, `passwords`, `first_name`, `last_name`, `date_of_birth`, `phone_number`) \
+            VALUES(%(username)s,%(id)s,%(password)s,%(firstName)s,%(lastName)s,%(dob)s,%(phoneNumber)s)'
+            cursor.execute(query,data["user"])
+            return jsonify("Success")
+    return make_response("how did u get here?")
+
+
 @app.route('/flights-table',methods=['GET'])
 def getFlights():
     cursor = conn.cursor()

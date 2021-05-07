@@ -75,7 +75,6 @@ function BookingAgentPort()
       "idNum":custidNum,
       "firstname":custFirstName,
       "lastname":custLastName,
-      "cardinfo":custCardInformation,
       "emailaddy":custEmailAddress
    };
 
@@ -228,14 +227,6 @@ function BookingAgentPort()
             name='lastname'
             value={custLastName}
             onChange={(e) => setIDNum(e.target.value)}
-            />
-            </p>
-			<p>Customer Card Information
-            <input
-            type='text'
-            name='cardinfo'
-            value={custCardInformation}
-            onChange={(e) => setBookingAgentID(e.target.value)}
             />
             </p>
 			<p>Customer Email Address:

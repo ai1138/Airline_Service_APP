@@ -80,6 +80,8 @@ function BookingAgentPort()
    };
 
    const historystuff = () => {
+      sessionStorage.setItem("token","");
+      sessionStorage.setItem("role",null)
       history.push("/")
    }
 	

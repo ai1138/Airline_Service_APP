@@ -54,8 +54,8 @@ function Lspage () {
             .then(data => {
                console.log(data);
                console.log(data[0]["customer_id"])
-               localStorage.setItem("token",data[0]["customer_id"]);
-               localStorage.setItem("role","customer");
+               sessionStorage.setItem("token",data[0]["customer_id"]);
+               sessionStorage.setItem("role","customer");
                history.push("/")
                
             });
@@ -82,8 +82,8 @@ function Lspage () {
             .then(data => {
                console.log(data);
                console.log(data[0]["booking_agent_id"])
-               localStorage.setItem("token",data[0]["booking_agent_id"]);
-               localStorage.setItem("role","bookingagent");
+               sessionStorage.setItem("token",data[0]["booking_agent_id"]);
+               sessionStorage.setItem("role","bookingagent");
                history.push("/")
             });
          }
@@ -107,8 +107,8 @@ function Lspage () {
             .then(data => {
                console.log(data);
                console.log(data[0]["airline_id"])
-               localStorage.setItem("token",data[0]["booking_agent_id"]);
-               localStorage.setItem("role","airline");
+               sessionStorage.setItem("token",data[0]["booking_agent_id"]);
+               sessionStorage.setItem("role","airline");
                history.push("/")
             });
          }

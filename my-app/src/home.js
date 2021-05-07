@@ -20,7 +20,7 @@ function Home()
    const [airLineLogin, setAirLineLogin] = useState(false);
    const start = () =>{
 
-      const roles  = (localStorage.getItem("role"))
+      const roles  = (sessionStorage.getItem("role"))
       console.log(roles)
       if(roles == "customer")
       {
@@ -45,7 +45,7 @@ function Home()
       setUserLogin(false);
       setBookingAgentLogin(false);
       setAirLineLogin(false);
-      console.log(localStorage.getItem("token"))
+      console.log(sessionStorage.getItem("token"))
    }
    const userLoginRender = () =>
    {
@@ -120,17 +120,9 @@ function Home()
    )
 
    return (
-<<<<<<< HEAD
       <div>
          <Button style = {{marginTop: '5px', width: '5%'}} variant="contained" color="secondary" onClick = {start}>start </Button>
             {noLogin ? defaultPage : null }
-=======
-         <div> 
-            
-         <Button style = {{marginTop: '5px', width: '5%'}} variant="contained" color="secondary" onClick = {noLoginRender}>default </Button>
-            {defaultPage ? defaultPage:null}
-         <Button style = {{marginTop: '5px', width: '5%'}} variant="contained" color="secondary" onClick = {userLoginRender}>customer </Button>
->>>>>>> 4a844e268972e8e50f4b0de8b3fe0b3f10262210
             {userLogin ? cusPage : null }
             {bookingAgentLogin ? baPage : null }
             {airLineLogin ? airPage : null }

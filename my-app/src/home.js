@@ -78,7 +78,7 @@ function Home()
          justifyContent: "center"}}>
         <img src = {logo} alt = "Logo" height="200" width="200" />
         <h1>Welcome Aboard!</h1> 
-        <Link variant="contained" color="secondary" to= '/BookingAgentPort'>Booking Agent Database</Link>
+        <Link variant="contained" color="secondary" to= '/BookingAgentPort'>Booking Agent Portal</Link>
         <tr>At your convenience, anytime, anywhere</tr>
         <SearchPage/>
 	</div>
@@ -93,14 +93,16 @@ function Home()
         <Link variant="contained" color="secondary" to= '/FlightManagement'>Flight Management System</Link>
         <tr>At your convenience, anytime, anywhere</tr>
         <SearchPage/>
+        
      </div>
       
    )
 
    return (
-      <div>
+         <div> 
+            
          <Button style = {{marginTop: '5px', width: '5%'}} variant="contained" color="secondary" onClick = {noLoginRender}>default </Button>
-            {noLogin ? defaultPage : null }
+            {defaultPage ? defaultPage:null}
          <Button style = {{marginTop: '5px', width: '5%'}} variant="contained" color="secondary" onClick = {userLoginRender}>customer </Button>
             {userLogin ? cusPage : null }
          <Button style = {{marginTop: '5px', width: '5%'}} variant="contained" color="secondary" onClick = {bookingAgentLoginRender}>booking </Button>

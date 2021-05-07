@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import Table from './Table'
 import SearchPage from './SearchPage'
@@ -39,6 +39,9 @@ function Home()
          noLoginRender()
       }
    }
+   useEffect(() => {
+      start();
+    }, []);
    const noLoginRender = () =>
    {
       setNoLogin(!noLogin);
@@ -121,7 +124,6 @@ function Home()
 
    return (
       <div>
-         <Button style = {{marginTop: '5px', width: '5%'}} variant="contained" color="secondary" onClick = {start}>start </Button>
             {noLogin ? defaultPage : null }
             {userLogin ? cusPage : null }
             {bookingAgentLogin ? baPage : null }

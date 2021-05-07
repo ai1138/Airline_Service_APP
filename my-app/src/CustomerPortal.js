@@ -14,7 +14,7 @@ function CustomerPortal()
 
 {
 
-	
+   const [customerTopBoolean, setcustopbool] = useState(false);
    const [PurchaseNewTickets, setNewTicket] = useState(false);
    const [NewRating, setNewRating] = useState(false);
    const [NewAirplaneShown,setNewAirplane] = useState(false);
@@ -61,6 +61,7 @@ function CustomerPortal()
 
 
 	  const user = {
+		 "top customer boolean": customerTopBoolean,
 		"deparrture date": departureDate,
 		 "departure time": departureTime,
 	   "role": "",

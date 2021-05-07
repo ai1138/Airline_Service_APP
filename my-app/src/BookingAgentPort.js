@@ -261,17 +261,17 @@ function BookingAgentPort()
       
    <div style = {{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
       <img src = {logo} alt = "Logo" height="200" width="200" />
-      <h1> Booking Agent Database! </h1>
+      <h1> Booking Agent Portal! </h1>
       <Link variant="contained" color="secondary" to= '/CustomerInfo'> Click to Update Information </Link>
       <div style = {{display: 'flex', direction: 'row', width: '800px', alignItems: 'center'}}>
-      <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating ? '50%' : '100%'}`,  alignItems: 'right', flexDirection: 'column'}}>
+      <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null} href = './Table'> View Customer Flights </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href= './SearchPage'> Search For Flights </Button>
 		<Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View My Commission </Button>
 
          
       </div>
-      <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating? '50%' : '100%'}`,  alignItems: 'right', flexDirection: 'column'}}>
+      <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {PurchaseTicketRender}> Purchase Tickets </Button>
 <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {TopCustomersRender}>  View Top Customers </Button>
       </div>
@@ -279,10 +279,13 @@ function BookingAgentPort()
          {PurchaseNewTickets ? PurchaseTickets: null }    
          {SeeTopCustomers ? TopCustomers : null }
 
+
          
       </div>
       </div> 
+      <Button style = {{marginTop: '10px', width: '10%'}} variant="contained" color="secondary" href= './home'> Log Out </Button>
       </div>
+      
 
    );
 

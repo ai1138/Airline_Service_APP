@@ -357,7 +357,8 @@ function FlightManagement()
          {NewAirportShown ? NewAirportForm: null }
           
       </div>
-      </div> 
+      </div>
+      <Button style = {{marginTop: '10px', width: '10%'}} variant="contained" color="secondary" href= './home'> Log Out </Button> 
       </div>
 
    );

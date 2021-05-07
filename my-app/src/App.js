@@ -11,6 +11,7 @@ import CustomerInfo from './CustomerInfo';
 import CustomerPortal from './CustomerPortal';
 import SearchPage from './SearchPage';
 import Table from "./Table";
+import BookingAgentPort from "./BookingAgentPort";
 
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
        <Route path = "/CustomerInfo" component = {CustomerInfo}/>
 			<Route path= "/SearchPage" component={SearchPage}/>
 			<Route path= "/Table" component={Table}/>
+			<Route path= "/BookingAgentPort" component= {BookingAgentPort}/>
        </Switch>
       </div>
       </BrowserRouter>

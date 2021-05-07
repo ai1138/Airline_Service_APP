@@ -13,9 +13,16 @@ import CustomerInfo from './CustomerInfo';
 function BookingAgentPort()
 
 {
-
 	
+	const [customerBookingAgentID, setBAID] = useState(false);
+	const [custFirstName, setcustFirstName] = useState(false);
+	const [custLastName, setcustLastName] = useState(false);
+	const [custidNum, setcustidNum] = useState(false);
+	const [custEmailAddress, setcusEmailAddressl] = useState(false);
+	const [custCardInformation, setcustCardInformation] = useState(false);
+	const [customerTopBoolean, setcustopbool] = useState(false);
    const [PurchaseNewTickets, setNewTicket] = useState(false);
+   const [SeeTopCustomers, setTopCustomer] = useState(false);
    const [NewRating, setNewRating] = useState(false);
    const [NewAirplaneShown,setNewAirplane] = useState(false);
    const [NewAirportShown,setNewAirport] = useState(false);
@@ -61,31 +68,12 @@ function BookingAgentPort()
 
 
 	  const user = {
-		"deparrture date": departureDate,
-		 "departure time": departureTime,
 	   "role": "",
-		"customer ID" : idNum,
+		"ID" : idNum,
 	   "firstName": firstName, 
 	   "lastName": lastName,
 	   "email": email,
-	   "username": username,
-	   "password": password,
-	   "airline": airline,
-	   "dob": dob,
-	   "phoneNumber": phoneNumber,
-	   "street": street,
-	   "city": city,
-	   "state": state,
-	   "passport num": passportNum,
-	   "passport expiration": passportExpiration,
-	   "passport country": passportCountry,
-	   "flight number": flightNum,
-	   "ticket price": basePrice,
-	   "payment id": paymentID,
-	   "purchase date": purchaseDate, 
-		"purchase time": purchaseTime,
-		 "booking agent id": bookingAgentID,
-		  "record id": recordID
+		"custID": custidNum
 	    
    };
 	
@@ -112,10 +100,10 @@ function BookingAgentPort()
 	  setNewRating(false);
       console.log("tickets");
    }
-   const CommentRatingRender = (props) => {
-	   setNewRating(!NewRating);
+   const TopCustomersRender = (props) => {
+	   setTopCustomer(!SeeTopCustomers);
 	   setNewTicket(false);
-	   console.log("rating");
+	   console.log("customers topp");
 
    }
   // handlePurchaseDate(event)  {
@@ -138,24 +126,34 @@ function BookingAgentPort()
 
  
 
-   const submitNewCommentRateForm = () => {
-		   if (flightNum !== "") {
-			   if (idNum !== "") {
-				   console.log("valid airplane")
-				   if (departureDate !== "") {
-					   if (departureTime !== "") {
-						   console.log("we validddd")
-					   }
-				   }
-			   }
-			   else {
-				   console.log("no valid id num")
-			   }
+   const findAllCustomersComiss = () => {
+		   if (customerBookingAgentID == this.idNum) {
+			   if (customerTopBoolean == false) {
+				   customerTopBoolean = false;
+				   //algorthim to check if this customers commision is greater than
+				   //all others. if customercommission > all other commission
+				   console.log("this the highest paying customer")
+				   //this is second highest paying customer, etc
+				   console.log(custFirstName)
+				   console.log(custLastName)
+				   //we do this algorithm again for 4 more customers to get the top 5
 		   }
-		   else {
-			   console.log("no valid flight num")
+	}
+   }
+				   
+	 const findAllCustomersTicks = () => {
+		   if (customerBookingAgentID == this.idNum) {
+			   if (customerTopBoolean == false) {
+				   customerTopBoolean = false;
+				   //algorthim to check if this customers commision is greater than
+				   //all others. if customertickets > all other tickets
+				   console.log("this the highest paying customer")
+				   console.log(custFirstName)
+				   console.log(custLastName)
+				   //we do this algorithm again for 4 more customers to get the top 5
 		   }
-	   }
+	}
+	}
    const submitNewTicketForm = () => { //this is for the new tickets
       if(idNum !== "") {
 		  if (email !== "") {
@@ -182,43 +180,12 @@ function BookingAgentPort()
    }
 
 
-   const CommentRating = ( //this is the actual form construction
+   const TopCustomers = ( //this is the actual form construction
       <div>
-         <form>
-            <p>Depature Date</p>
-            <input
-            type='text'
-            name='depatureDate'
-            value={departureDate}
-            onChange={(e) => setAirplaneID(e.target.value)}
-            />
-			<p>Depature Time</p>
-            <input
-            type='text'
-            name='departureTime'
-            value={departureTime}
-            onChange={(e) => setAirplaneID(e.target.value)}
-            />
-            <p>Flight Number:</p>
-            <input 
-            type='text'
-            name='name'
-            value={flightNum}
-            onChange={(e) => setFlightNum(e.target.value)}
-            />
-            <p> Confirm Customer ID:</p>
-            <input
-            type='text'
-            name='name'
-            value={idNum}
-            onChange={(e) => setIDNum(e.target.value)}
-            />
-			<textarea rows="4" cols="50" name="comment" form="usrform">
-			Enter your comment here...</textarea>
-         </form>
-
-         <Button variant="contained" color="blue" onClick = {submitNewTicketForm}>submit</Button>
+         <Button variant="contained" color="blue" onClick = {findAllCustomersComiss}>Click to See Top Customers via Commission</Button>
+         <Button variant="contained" color="blue" onClick = {findAllCustomersTicks}>Click to See Top Customers via Tickets Bought</Button>
       </div>
+	   
    );
   
    const PurchaseTickets = (
@@ -237,23 +204,47 @@ function BookingAgentPort()
             <input
             type='text'
             name='idNum'
-            value={idNum}
+            value={custidNum}
             onChange={(e) => setIDNum(e.target.value)}
             />
             </p>
-			<p>Confirm Booking Agent ID Num:
+			<p>Customer First Name:
+            <input
+            type='text'
+            name='idNum'
+            value={custFirstName}
+            onChange={(e) => setIDNum(e.target.value)}
+            />
+            </p>
+			<p>Customer Last Name:
+            <input
+            type='text'
+            name='idNum'
+            value={custLastName}
+            onChange={(e) => setIDNum(e.target.value)}
+            />
+			<p>Confirm Customer Email Address:
             <input
             type='text'
             name='name'
-            value={bookingAgentID}
+            value={custEmailAddress}
             onChange={(e) => setBookingAgentID(e.target.value)}
             />
             </p>
-			<p>Confirm Email Address:
+            </p>
+			<p>Customer Card Information
+            <input
+            type='text'
+            name='name'
+            value={custCardInformation}
+            onChange={(e) => setBookingAgentID(e.target.value)}
+            />
+            </p>
+			<p>Confirm Customer Email Address:
             <input
             type='text'
             name='email'
-            value={email}
+            value={custEmailAddress}
             onChange={(e) => setEmail(e.target.value)}
 			onChange={(e) => setPaymentID((e.target.value))}
 			onChange={(e) => setPurchaseDate((e.target.value))}
@@ -282,11 +273,11 @@ function BookingAgentPort()
       </div>
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating? '50%' : '100%'}`,  alignItems: 'right', flexDirection: 'column'}}>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {PurchaseTicketRender}> Purchase Tickets </Button>
-<Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {CommentRatingRender}>  View Top Customers </Button>
+<Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {TopCustomersRender}>  View Top Customers </Button>
       </div>
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating ? '50%' : '0px'}`, alignItems: 'center'}}>
          {PurchaseNewTickets ? PurchaseTickets: null }    
-         {NewRating ? CommentRating : null }
+         {SeeTopCustomers ? TopCustomers : null }
 
          
       </div>

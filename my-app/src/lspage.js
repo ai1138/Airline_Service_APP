@@ -5,7 +5,7 @@ import {button} from "./button";
 import Button from '@material-ui/core/Button';
 import registerpage from './registerPage';
 import logo from './PngItem_61922.png';
-
+import {useHistory} from 'react-router-dom'
 
 function Lspage () {
 
@@ -14,46 +14,73 @@ function Lspage () {
    const [airlineLoginShown,setAirLineLoginShown] = useState(false);
    const [username, setUserName] = useState("");
    const [password, setPassWord] = useState("");
+   const history = useHistory();
+   const user = {"username":username,"password":password,"role":""};
    const CustomerRender = (props) => 
    {
       setCustomerLoginShown(!customerLoginShown);
       setBaLoginShown(false);
       setAirLineLoginShown(false);
       console.log("customer")
+      user.role = "customer";
    }
    const BookingRender = (props) => {
 	   setBaLoginShown(!baLoginShown);
       setCustomerLoginShown(false);
       setAirLineLoginShown(false);
       console.log("ba");
+      user.role = "bookingagent";
    }
    const AirlineRender = (props) => {
 	   setAirLineLoginShown(!airlineLoginShown);
       setCustomerLoginShown(false);
       setBaLoginShown(false);
       console.log("airline");
+      user.role = "airline";
    }
    const submitCustomerForm = () =>
    {
       if(username !=="")
          if(password !== "")
          {
-            console.log("yeee")
+            user.role = "customer";
+            fetch('http://localhost:5000/login', {
+               method: 'POST',
+               body: JSON.stringify({ user }),
+               headers: { 'Content-Type': 'application/json' },
+            })
+            .then(res => res.json())
+            .then(data => {
+               console.log(data);
+               console.log(data[0]["customer_id"])
+               history.push("/")
+               
+            });
+
          }
          else
          {
             console.log("naw")
          }
+
    }
    const submitBookingAgentForm = () =>
    {
       if(username !=="")
          if(password !== "")
          {
-            fetch(`http://localhost:5000/login/${username}/${password}`, {
-               method: 'GET',
-               headers: {'Content-Type': 'appication/json'}
-              }).then(res => console.log(res))
+            user.role = "bookingagent";
+            fetch('http://localhost:5000/login', {
+               method: 'POST',
+               body: JSON.stringify({ user }),
+               headers: { 'Content-Type': 'application/json' },
+            })
+            .then(res => res.json())
+            .then(data => {
+               console.log(data);
+               console.log(data[0]["booking_agent_id"])
+               history.push("/")
+            });
          }
          else
          {
@@ -65,7 +92,18 @@ function Lspage () {
       if(username !=="")
          if(password !== "")
          {
-            console.log("yeee")
+            user.role = "airline";
+            fetch('http://localhost:5000/login', {
+               method: 'POST',
+               body: JSON.stringify({ user }),
+               headers: { 'Content-Type': 'application/json' },
+            })
+            .then(res => res.json())
+            .then(data => {
+               console.log(data);
+               console.log(data[0]["airline_id"])
+               history.push("/")
+            });
          }
          else
          {

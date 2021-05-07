@@ -79,14 +79,23 @@ function Registerpage ()
    const submitCustomerForm = () =>
    {
       if(city !== "")
+         console.log("ye")
          if(state !== "")
+            console.log("ye")
             if(street !== "")
+               console.log("ye")
                if(dob !== "")
+                  console.log("ye")
                   if(phoneNumber !== "")
+                     console.log("ye")
                      if(firstName !== "")
+                        console.log("ye")
                         if(lastName !== "")
+                           console.log("ye")
                            if(email !== "")
+                              console.log("ye")
                               if(username !== "")
+                                 console.log("ye")
                                  if(password !== "")
                                  {
                                     setAddy(street + city  + state)
@@ -100,14 +109,22 @@ function Registerpage ()
                                     })
                                     .then(res => res.json())
                                     .then(data => {
-                                       setRegMes(data);
-                                       console.log(data)
+                                       console.log(data);
+                                       data = String(JSON.stringify(data))
+                                       data = JSON.stringify(data)
+                                       if(console.log(data.valueOf() === ("Success").valueOf()))
+                                          console.log("yeno")
+                                          history.push("/lspage")
+                                      // history.push("/")    
                                      })
                                      .catch((error) => {
                                        console.error('Error:', error);
                                      });
                                      
                                  }
+      
+                               
+
       
    }
    const submitBAForm = () =>
@@ -117,7 +134,7 @@ function Registerpage ()
             if(firstName !== "")
                if(lastName !== "")
                   if(email !== "")
-                     console.log("hello")
+                     
                      if(username !== "")
                         if(password !== "")
                         {
@@ -131,7 +148,12 @@ function Registerpage ()
                            })
                            .then(res => res.json())
                            .then(data => {
-                              console.log('Success:', data);
+                              console.log(typeof(data),data)
+                              console.log(typeof("Success"),"Success")
+                              if(console.log(data.valueOf() === ("Success").valueOf()))
+                                 console.log("yeno")
+                                 history.push("/lspage")
+                              history.push("/")
                             })
                            .catch((error) => {
                               console.error('Error:', error);
@@ -147,12 +169,12 @@ function Registerpage ()
                if(firstName !== "")
                   if(lastName !== "")
                      if(email !== "")
-                        console.log("here")
+                        
                         if(username !== "")
                            if(password !== "")
                            {
                               user.dob = new Date(user.dob)
-                               user.role = "airline";
+                              user.role = "airline";
                               fetch('http://localhost:5000/register', {
                                  method: 'POST',
                                  body: JSON.stringify({ user }),
@@ -160,8 +182,12 @@ function Registerpage ()
                               })
                               .then(res => res.json())
                               .then(data => {
-                                 setErrors(data)
-                                 console.log('Success:', data);
+                                 console.log(data);
+                                 data = JSON.stringify(data)
+                                 if(console.log(data.valueOf() === ("Success").valueOf()))
+                                    console.log("yeno")
+                                    history.push("/lspage")
+                                 history.push("/")            
                                })
                               .catch((error) => {
                                  console.error('Error:', error);
@@ -192,13 +218,6 @@ function Registerpage ()
         name='name'
         value={dob}
         onChange={(e) => Date(setDOB(e.target.value))}
-      />
-      <p>Enter your address:</p>
-      <input
-        type='text'
-        name='name'
-        value={addy}
-        onChange={(e) => setAddy(e.target.value)}
       />
       <p>Enter your phone number:</p>
       <input

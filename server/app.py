@@ -26,14 +26,29 @@ conn = pymysql.connect(host='localhost',
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-@app.route('/login/:id/:passwrd', methods =['GET'])
+@app.route('/login', methods =['POST'])
 def login():
-    loginInfo = []
+    data = request.json
     cursor = conn.cursor()
-    query = 'SELECT * FROM `customer` WHERE `email` = %s '
-    cursor.execute(query)
-    data = cursor.fetchall()
-    return jsonify(data)
+    if(data["user"]["role"] == "customer"):
+         query = 'SELECT * FROM `customer` WHERE `username` = %(username)s AND `passwords` = %(password)s '
+         cursor.execute(query,data["user"])
+         airRes = cursor.fetchall()
+         if(airRes):
+            return jsonify(airRes)
+    if(data["user"]["role"] == "bookingagent"):
+        query = 'SELECT * FROM `booking_agent` WHERE `username` = %(username)s AND `passwords` = %(password)s '
+        cursor.execute(query,data["user"])
+        bookRes = cursor.fetchall()
+        if(bookRes):
+             return jsonify(bookRes)
+    if(data["user"]["role"] == "airline"):
+        query = 'SELECT * FROM `airline_staff` WHERE `username` = %(username)s AND `passwords` = %(password)s'
+        cursor.execute(query,data["user"])
+        lineRes = cursor.fetchall()
+        if(lineRes):
+             return jsonify(lineRes)
+    return jsonify("failed to find user")
 @app.route('/register',methods =['POST'])
 def signUp():
     create_id = id_generator(6)
@@ -50,32 +65,32 @@ def signUp():
     cursor.execute(query,data["user"])
     airRes = cursor.fetchall()
     if(cusRes):
-        return "user exists try again"
+        return jsonify("user exists try again")
     elif(baRes):
-        return "user exists try again"
+        return jsonify("user exists try again")
     elif(airRes):
-        return "user exists try again"
+        return jsonify("user exists try again")
     elif(data["user"]["role"] == "customer"):
         query = 'INSERT INTO customer(email, customer_id, username, first_name,last_name,passwords, address, phone_number, passport_number, passport_expiration, passport_country, date_of_birth) \
         VALUES (%(email)s,%(id)s,%(username)s,%(firstName)s,%(lastName)s,%(password)s,%(address)s,%(phoneNumber)s,%(passport num)s ,%(passport expiration)s,%(passport country)s,%(dob)s);'
         cursor.execute(query,data["user"])
-        return "Success"
+        return jsonify("Success")
     elif(data["user"]["role"] == "bookingagent"):
         query ='INSERT INTO `booking_agent`(`first_name`, `last_name`, `username`, `email`, `passwords`, `booking_agent_id`, `customer_id`) \
         VALUES(%(firstName)s,%(lastName)s,%(username)s,%(email)s,%(password)s,%(id)s,"")' 
         cursor.execute(query,data["user"])
-        return "Success"
+        return jsonify("Success")
     elif(data["user"]["role"] == "airline"):
         query = 'SELECT * FROM `airline` WHERE `name` = %(airline)s'
         cursor.execute(query,data["user"])
         lineRes = cursor.fetchall()
         if(not lineRes):
-            return "error airline doesnt exist"
+            return jsonify("error airline doesnt exist")
         else:
             query = 'INSERT INTO `airline_staff`(`username`, `airline_id`, `passwords`, `first_name`, `last_name`, `date_of_birth`, `phone_number`) \
             VALUES(%(username)s,%(id)s,%(password)s,%(firstName)s,%(lastName)s,%(dob)s,%(phoneNumber)s)'
             cursor.execute(query,data["user"])
-            return "Success"
+            return jsonify("Success")
     return make_response("how did u get here?")
 
 

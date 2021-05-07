@@ -29,7 +29,7 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 @app.route('/updateFlight', methods =['POST'])
 def updateFlightStat():
     data = request.json
-    
+    pass
 @app.route('/airline-flights-table', methods = ['POST'])
 def show_airline_flight():
     pass    

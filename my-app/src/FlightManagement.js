@@ -7,9 +7,12 @@ import Button from '@material-ui/core/Button';
 import logo from './PngItem_61922.png';
 import Home from './home'
 import Navigation from './navigation';
+import {useHistory} from 'react-router-dom';
+
 
 function FlightManagement()
 {
+   const history = useHistory();
    const [NewAirplaneShown,setNewAirplane] = useState(false);
    const [NewAirportShown,setNewAirport] = useState(false);
    const [NewFlightShown,setNewFlight] = useState(false);
@@ -56,6 +59,10 @@ function FlightManagement()
       "flightnumstatus": flightnumstatus,
       "newflightstatus": newflightstatus
    };
+
+   const historystuff = () => {
+      history.push("/")
+   }
 
    const AirplaneRender = (props) => {
 	   setNewAirplane(!NewAirplaneShown);
@@ -358,7 +365,7 @@ function FlightManagement()
           
       </div>
       </div>
-      <Button style = {{marginTop: '10px', width: '10%'}} variant="contained" color="secondary" href= './home'> Log Out </Button> 
+      <Button style = {{marginTop: '10px', width: '10%'}} variant="contained" color="secondary" onClick = {historystuff}> Log Out </Button> 
       </div>
 
    );

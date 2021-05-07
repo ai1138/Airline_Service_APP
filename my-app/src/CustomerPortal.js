@@ -8,12 +8,13 @@ import logo from './PngItem_61922.png';
 import Home from './home'
 import Navigation from './navigation';
 import CustomerInfo from './CustomerInfo';
+import {useHistory} from 'react-router-dom';
 
 
 function CustomerPortal()
 
 {
-
+   const history = useHistory();
    const [customerTopBoolean, setcustopbool] = useState(false);
    const [PurchaseNewTickets, setNewTicket] = useState(false);
    const [NewRating, setNewRating] = useState(false);
@@ -89,6 +90,10 @@ function CustomerPortal()
 		  "record id": recordID
 	    
    };
+
+   const historystuff = () => {
+      history.push("/")
+   }
 	
    const AirplaneRender = (props) => {
 	   setNewAirplane(!NewAirplaneShown);
@@ -292,7 +297,7 @@ function CustomerPortal()
          
       </div>
       </div> 
-      <Button style = {{marginTop: '10px', width: '10%'}} variant="contained" color="secondary" href= './home'> Log Out </Button>
+      <Button style = {{marginTop: '10px', width: '10%'}} variant="contained" color="secondary" onClick = {historystuff}> Log Out </Button>
       </div>
 
    );

@@ -8,12 +8,14 @@ import logo from './PngItem_61922.png';
 import Home from './home'
 import Navigation from './navigation';
 import CustomerInfo from './CustomerInfo';
+import {useHistory} from 'react-router-dom';
+
 
 
 function BookingAgentPort()
 
 {
-	
+   const history = useHistory();
 	const [customerBookingAgentID, setBAID] = useState(false);
 	const [custFirstName, setcustFirstName] = useState(false);
 	const [custLastName, setcustLastName] = useState(false);
@@ -76,6 +78,10 @@ function BookingAgentPort()
 		"custID": custidNum
 	    
    };
+
+   const historystuff = () => {
+      history.push("/")
+   }
 	
    const AirplaneRender = (props) => {
 	   setNewAirplane(!NewAirplaneShown);
@@ -283,7 +289,7 @@ function BookingAgentPort()
          
       </div>
       </div> 
-      <Button style = {{marginTop: '10px', width: '10%'}} variant="contained" color="secondary" href= './home'> Log Out </Button>
+      <Button style = {{marginTop: '10px', width: '10%'}} variant="contained" color="secondary" onClick = {historystuff}> Log Out </Button>
       </div>
       
 

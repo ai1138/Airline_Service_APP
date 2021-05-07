@@ -14,17 +14,38 @@ import BookingAgentPort from './BookingAgentPort';
 function Home()
 {     //make loginInfo be either customer,bookingagent or airline and render the page according to state 
       //if loginInfo is "" that means no one loged in
-    const [noLogin,setNoLogin] = useState(false);
-    const [userLogin, setUserLogin] = useState(false);
-    const [bookingAgentLogin, setBookingAgentLogin] = useState(false);
-    const [airLineLogin, setAirLineLogin] = useState(false);
+   const [noLogin,setNoLogin] = useState(false);
+   const [userLogin, setUserLogin] = useState(false);
+   const [bookingAgentLogin, setBookingAgentLogin] = useState(false);
+   const [airLineLogin, setAirLineLogin] = useState(false);
+   const start = () =>{
 
+      const roles  = (localStorage.getItem("role"))
+      console.log(roles)
+      if(roles == "customer")
+      {
+         userLoginRender()
+      }
+      else if(roles == "bookingagent")
+      {
+         bookingAgentLoginRender()
+      }
+      else if(roles == "airline")
+      {
+         airLineLoginRender()
+      }
+      else
+      {
+         noLoginRender()
+      }
+   }
    const noLoginRender = () =>
    {
       setNoLogin(!noLogin);
       setUserLogin(false);
       setBookingAgentLogin(false);
       setAirLineLogin(false);
+      console.log(localStorage.getItem("token"))
    }
    const userLoginRender = () =>
    {
@@ -99,13 +120,10 @@ function Home()
 
    return (
       <div>
-         <Button style = {{marginTop: '5px', width: '5%'}} variant="contained" color="secondary" onClick = {noLoginRender}>default </Button>
+         <Button style = {{marginTop: '5px', width: '5%'}} variant="contained" color="secondary" onClick = {start}>start </Button>
             {noLogin ? defaultPage : null }
-         <Button style = {{marginTop: '5px', width: '5%'}} variant="contained" color="secondary" onClick = {userLoginRender}>customer </Button>
             {userLogin ? cusPage : null }
-         <Button style = {{marginTop: '5px', width: '5%'}} variant="contained" color="secondary" onClick = {bookingAgentLoginRender}>booking </Button>
             {bookingAgentLogin ? baPage : null }
-         <Button style = {{marginTop: '5px', width: '5%'}} variant="contained" color="secondary" onClick = {airLineLoginRender}>airline </Button>
             {airLineLogin ? airPage : null }
       </div>
       

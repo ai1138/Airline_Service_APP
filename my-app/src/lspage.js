@@ -18,6 +18,7 @@ function Lspage () {
    const user = {"username":username,"password":password,"role":""};
    const CustomerRender = (props) => 
    {
+      
       setCustomerLoginShown(!customerLoginShown);
       setBaLoginShown(false);
       setAirLineLoginShown(false);
@@ -53,6 +54,8 @@ function Lspage () {
             .then(data => {
                console.log(data);
                console.log(data[0]["customer_id"])
+               localStorage.setItem("token",data[0]["customer_id"]);
+               localStorage.setItem("role","customer");
                history.push("/")
                
             });
@@ -79,6 +82,8 @@ function Lspage () {
             .then(data => {
                console.log(data);
                console.log(data[0]["booking_agent_id"])
+               localStorage.setItem("token",data[0]["booking_agent_id"]);
+               localStorage.setItem("role","bookingagent");
                history.push("/")
             });
          }
@@ -102,6 +107,8 @@ function Lspage () {
             .then(data => {
                console.log(data);
                console.log(data[0]["airline_id"])
+               localStorage.setItem("token",data[0]["booking_agent_id"]);
+               localStorage.setItem("role","airline");
                history.push("/")
             });
          }
@@ -193,16 +200,16 @@ function Lspage () {
              <h1>Already Have An Account?! Click the type you need!</h1> 
              <tr>At your convenience, anytime, anywhere</tr>
              <div style = {{display: 'flex', direction: 'row', width: '800px', alignItems: 'center'}}>
-                <div style = {{display: 'flex', width: `${customerLoginShown || baLoginShown || airlineLoginShown ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
+                { <div style = {{display: 'flex', width: `${customerLoginShown || baLoginShown || airlineLoginShown ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
                   <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {CustomerRender}>Customer </Button>
                   <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {BookingRender}>Booking Agent </Button>
                   <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {AirlineRender}>Airline Staff </Button>
                   <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href= './registerPage'>Register!</Button>
-                </div>
+                </div> }
                 <div style = {{display: 'flex', width: `${customerLoginShown || baLoginShown || airlineLoginShown ? '50%' : '0px'}`, alignItems: 'center'}}>
                   {customerLoginShown ? customerLogin : null }
                   {baLoginShown ? bookingagentLogin : null }
-                  {airlineLoginShown ? airlinestaffLogin : null }
+                  {airlineLoginShown ? airlinestaffLogin : null } 
                 </div>
 
 

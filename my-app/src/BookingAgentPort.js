@@ -70,13 +70,12 @@ function BookingAgentPort()
 
 
 	  const user = {
-	   "role": "",
-		"ID" : idNum,
-	   "firstName": firstName, 
-	   "lastName": lastName,
-	   "email": email,
-		"custID": custidNum
-	    
+      "role": "",
+      "flightNum":flightNum,
+      "idNum":custidNum,
+      "firstname":custFirstName,
+      "lastname":custLastName,
+      "emailaddy":custEmailAddress
    };
 
    const historystuff = () => {
@@ -208,7 +207,7 @@ function BookingAgentPort()
             onChange={(e) => setFlightNum(e.target.value)}
             />
             </p>
-			<p>Confirm Customer ID Num:
+			<p>Customer ID Num:
             <input
             type='text'
             name='idNum'
@@ -219,7 +218,7 @@ function BookingAgentPort()
 			<p>Customer First Name:
             <input
             type='text'
-            name='idNum'
+            name='firstname'
             value={custFirstName}
             onChange={(e) => setIDNum(e.target.value)}
             />
@@ -227,37 +226,21 @@ function BookingAgentPort()
 			<p>Customer Last Name:
             <input
             type='text'
-            name='idNum'
+            name='lastname'
             value={custLastName}
             onChange={(e) => setIDNum(e.target.value)}
             />
-			<p>Confirm Customer Email Address:
+            </p>
+			<p>Customer Email Address:
             <input
             type='text'
-            name='name'
-            value={custEmailAddress}
-            onChange={(e) => setBookingAgentID(e.target.value)}
-            />
-            </p>
-            </p>
-			<p>Customer Card Information
-            <input
-            type='text'
-            name='name'
-            value={custCardInformation}
-            onChange={(e) => setBookingAgentID(e.target.value)}
-            />
-            </p>
-			<p>Confirm Customer Email Address:
-            <input
-            type='text'
-            name='email'
+            name='emailaddy'
             value={custEmailAddress}
             onChange={(e) => setEmail(e.target.value)}
-			onChange={(e) => setPaymentID((e.target.value))}
-			onChange={(e) => setPurchaseDate((e.target.value))}
-			onChange={(e) => setPurchaseTime((e.target.value))}
-			onChange={(e) => setBasePrice(e.target.value)}
+			   onChange={(e) => setPaymentID((e.target.value))}
+			   onChange={(e) => setPurchaseDate((e.target.value))}
+			   onChange={(e) => setPurchaseTime((e.target.value))}
+			   onChange={(e) => setBasePrice(e.target.value)}
             />
             </p>
          </form>
@@ -275,13 +258,11 @@ function BookingAgentPort()
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null} href = './Table'> View Customer Flights </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href= './SearchPage'> Search For Flights </Button>
-		<Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View My Commission </Button>
-
-         
+		   <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View My Commission </Button>
       </div>
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {PurchaseTicketRender}> Purchase Tickets </Button>
-<Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {TopCustomersRender}>  View Top Customers </Button>
+         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {TopCustomersRender}>  View Top Customers </Button>
       </div>
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating ? '50%' : '0px'}`, alignItems: 'center'}}>
          {PurchaseNewTickets ? PurchaseTickets: null }    

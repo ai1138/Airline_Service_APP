@@ -26,6 +26,14 @@ conn = pymysql.connect(host='localhost',
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
+@app.route('/updateFlight', methods =['POST'])
+def updateFlightStat():
+    data = request.json
+    
+@app.route('/airline-flights-table', methods = ['POST'])
+def show_airline_flight():
+    pass    
+
 @app.route('/login', methods =['POST'])
 def login():
     data = request.json
@@ -87,8 +95,9 @@ def signUp():
         if(not lineRes):
             return jsonify("error airline doesnt exist")
         else:
-            query = 'INSERT INTO `airline_staff`(`username`, `airline_id`, `passwords`, `first_name`, `last_name`, `date_of_birth`, `phone_number`) \
-            VALUES(%(username)s,%(id)s,%(password)s,%(firstName)s,%(lastName)s,%(dob)s,%(phoneNumber)s)'
+            data["user"]["airline_id"] = lineRes["airline_id"]
+            query = 'INSERT INTO `airline_staff`(`staff_id`,`username`,`airline_id`, `passwords`, `first_name`, `last_name`, `date_of_birth`, `phone_number`) \
+            VALUES(%(id)s,%(username)s,%(airline_id)s,%(password)s,%(firstName)s,%(lastName)s,%(dob)s,%(phoneNumber)s)'
             cursor.execute(query,data["user"])
             return jsonify("Success")
     return make_response("how did u get here?")

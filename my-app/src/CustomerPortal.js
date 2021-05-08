@@ -13,13 +13,9 @@ import CustomerInfo from './CustomerInfo';
 function CustomerPortal()
 
 {
-<<<<<<< HEAD
-
-=======
    const history = useHistory();
    const [rating, setRating] = useState("");
    const [comment, setComment] = useState("");
->>>>>>> 9c92c0b1eaa45c333b896634957a76cd09498630
    const [customerTopBoolean, setcustopbool] = useState(false);
    const [PurchaseNewTickets, setNewTicket] = useState(false);
    const [NewRating, setNewRating] = useState(false);
@@ -66,19 +62,11 @@ function CustomerPortal()
 
 
 	  const user = {
-<<<<<<< HEAD
-		"top customer boolean": customerTopBoolean,
-		"deparrture date": departureDate,
-		"departure time": departureTime,
-	   "role": "",
-		"customer ID" : idNum,
-=======
 		  "comment": comment,
 		 "top customer boolean": customerTopBoolean,
 		"deparrture date": departureDate,
 		 "departure time": departureTime,
 		"customer_ID" : sessionStorage.getItem("token"),
->>>>>>> 9c92c0b1eaa45c333b896634957a76cd09498630
 	   "firstName": firstName, 
 	   "lastName": lastName,
 	   "email": email,
@@ -93,17 +81,6 @@ function CustomerPortal()
 	   "passport num": passportNum,
 	   "passport expiration": passportExpiration,
 	   "passport country": passportCountry,
-<<<<<<< HEAD
-	   "flight number": flightNum,
-	   "ticket price": basePrice,
-	   "payment id": paymentID,
-	   "purchase date": purchaseDate, 
-		"purchase time": purchaseTime,
-		"booking agent id": bookingAgentID,
-		"record id": recordID
-	    
-   };
-=======
 	   "flight_number": flightNum,
 	   "ticket_price": "",
 	   "ticket_id": "",
@@ -121,7 +98,6 @@ function CustomerPortal()
 	  sessionStorage.setItem("role", null);
       history.push("/")
    }
->>>>>>> 9c92c0b1eaa45c333b896634957a76cd09498630
 	
    const AirplaneRender = (props) => {
 	   setNewAirplane(!NewAirplaneShown);
@@ -274,37 +250,6 @@ function CustomerPortal()
             onChange={(e) => setFlightNum(e.target.value)}
             />
             </p>
-<<<<<<< HEAD
-			<p>Confirm Customer ID Num:
-            <input
-            type='text'
-            name='idNum'
-            value={idNum}
-            onChange={(e) => setIDNum(e.target.value)}
-            />
-            </p>
-			<p>Confirm Booking Agent ID Num:
-            <input
-            type='text'
-            name='name'
-            value={bookingAgentID}
-            onChange={(e) => setBookingAgentID(e.target.value)}
-            />
-            </p>
-			<p>Confirm Email Address:
-            <input
-            type='text'
-            name='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-			   onChange={(e) => setPaymentID((e.target.value))}
-			   onChange={(e) => setPurchaseDate((e.target.value))}
-			   onChange={(e) => setPurchaseTime((e.target.value))}
-			   onChange={(e) => setBasePrice(e.target.value)}
-            />
-            </p>
-=======
->>>>>>> 9c92c0b1eaa45c333b896634957a76cd09498630
          </form>
          <Button variant="contained" color="blue" onClick = {submitNewTicketForm}>submit</Button>
       </div>

@@ -52,11 +52,21 @@ function Lspage () {
             })
             .then(res => res.json())
             .then(data => {
-               console.log(data);
-               console.log(data[0]["customer_id"])
-               sessionStorage.setItem("token",data[0]["customer_id"]);
-               sessionStorage.setItem("role","customer");
-               history.push("/")
+
+               var message = parseInt(JSON.stringify(data));
+               console.log(message,typeof(message))
+               if(message == 100)
+               {
+                  sessionStorage.setItem("role",null);
+                  history.push("/")
+               }
+               else
+               {
+                  console.log(data[0]["customer_id"])
+                  sessionStorage.setItem("token",data[0]["customer_id"]);
+                  sessionStorage.setItem("role","customer");
+                  history.push("/")
+               }
                
             });
 
@@ -80,11 +90,21 @@ function Lspage () {
             })
             .then(res => res.json())
             .then(data => {
-               console.log(data);
-               console.log(data[0]["booking_agent_id"])
-               sessionStorage.setItem("token",data[0]["booking_agent_id"]);
-               sessionStorage.setItem("role","bookingagent");
-               history.push("/")
+               var message = parseInt(JSON.stringify(data));
+               
+               console.log(message,typeof(message))
+               if(message == 100)
+               {
+                  sessionStorage.setItem("role",null);
+                  history.push("/")
+               }
+               else
+               {
+                  console.log(data[0]["booking_agent_id"])
+                  sessionStorage.setItem("token",data[0]["booking_agent_id"]);
+                  sessionStorage.setItem("role","bookingagent");
+                  history.push("/")
+               }
             });
          }
          else
@@ -105,11 +125,23 @@ function Lspage () {
             })
             .then(res => res.json())
             .then(data => {
-               console.log(data);
-               console.log(data[0]["airline_id"])
-               sessionStorage.setItem("token",data[0]["booking_agent_id"]);
-               sessionStorage.setItem("role","airline");
-               history.push("/")
+               var message = parseInt(JSON.stringify(data));
+               
+               console.log(message,typeof(message))
+               if(message == 100)
+               {
+                  sessionStorage.setItem("role",null);
+                  history.push("/")
+               }
+               else
+               {
+                  console.log(data);
+                  console.log(data[0]["airline_id"])
+                  sessionStorage.setItem("token",data[0]["staff_id"]);
+                  sessionStorage.setItem("role","airline");
+                  history.push("/")
+               }
+               
             });
          }
          else

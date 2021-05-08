@@ -55,7 +55,7 @@ def newTicket():
                 `purchase_date_and_time`, `booking_agent_id`) VALUES \
                 (%(ticket_id)s,%(customer_ID)s,%(email)s,%(airline_id)s,%(flight_number)s,%(ticket_price)s,%(payment_id)s,%(purchase_date)s,%("")s)"
                 return jsonify("we purchaseddd")
-            return False
+            return jsonify("NoPayment")
         return jsonify("ee got through finding a flight")
     return jsonify("big error")
 

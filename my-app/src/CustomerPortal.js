@@ -179,16 +179,19 @@ function CustomerPortal()
 								   body: JSON.stringify({user}),
 								   headers: { 'Content-Type': 'application/json' },
             					})
-							   .then(res => res.json())
-							   .then(data => {
-								   console.log(data);
-                                     //  data = String(JSON.stringify(data))
-                                     //  data = JSON.stringify(data)
-                                       if(console.log(!data)) {
-										    history.push("/CustomerInfo")
-									   }
-									  
-							   })
+                                 .then(res => res.json())
+                                    .then(data => {
+                                       console.log(data);
+                                       data = String(JSON.stringify(data))
+                                       data = JSON.stringify(data)
+                                       if(console.log(data.valueOf() === ("NoPayment").valueOf()))
+                                          console.log("yeno")
+                                          history.push("/CustomerInfo")
+                                      // history.push("/")    
+                                     })
+                                     .catch((error) => {
+                                       console.error('Error:', error);
+                                     });
 					}
    }
 

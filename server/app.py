@@ -6,6 +6,7 @@ import pymysql.cursors
 from flask_cors import CORS,cross_origin
 import string
 import random
+from datetime import *
 app = Flask(__name__)
 config = {
   'ORIGINS': [
@@ -30,6 +31,7 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 def updateFlightStat():
     data = request.json
     pass
+
 @app.route('/airline-flights-table', methods = ['POST'])
 def show_airline_flight():
     data = request.json
@@ -90,7 +92,7 @@ def login():
         lineRes = cursor.fetchall()
         if(lineRes):
              return jsonify(lineRes)
-    return jsonify("failed to find user")
+    return jsonify(100)
 @app.route('/register',methods =['POST'])
 def signUp():
     create_id = id_generator(6)
@@ -136,11 +138,29 @@ def signUp():
             return jsonify("Success")
     return make_response("how did u get here?")
 
+@app.route('/cus-flights-table',methods=['POST'])
+def viewCusFlights():
+    data = request.json
+    curs = conn.cursor()
+    query = 'SELECT * FROM `customer` WHERE `customer_id` = %(customer_ID)s '
+    curs.execute(query, data["user"])
+    res = curs.fetchall()
+    if(res):
+        query = 'SELECT * FROM flight\
+        INNER JOIN past_flights ON flight.flight_num = past_flights.flight_num\
+        INNER JOIN airline ON flight.airline_id = airline.airline_id\
+        WHERE past_flights.customer_id = %(customer_ID)s'
+        curs.execute(query,data["user"])
+        info = curs.fetchall()
+        return jsonify(info)
+    return jsonify("err")
 
 @app.route('/flights-table',methods=['GET'])
 def getFlights():
     cursor = conn.cursor()
-    query = 'SELECT flight_num,statuses,departure_date_and_time,departure_airport,airport_arrival,arrival_date_and_time FROM flight'
+    query = 'SELECT * FROM `flight`\
+    INNER JOIN airline ON flight.airline_id = airline.airline_id\
+    WHERE flight.departure_date_and_time > CURDATE()'
     cursor.execute(query)
     data = cursor.fetchall()
     data = jsonify(data)

@@ -8,13 +8,12 @@ import logo from './PngItem_61922.png';
 import Home from './home'
 import Navigation from './navigation';
 import CustomerInfo from './CustomerInfo';
-import {useHistory} from 'react-router-dom';
 
 
 function CustomerPortal()
 
 {
-   const history = useHistory();
+
    const [customerTopBoolean, setcustopbool] = useState(false);
    const [PurchaseNewTickets, setNewTicket] = useState(false);
    const [NewRating, setNewRating] = useState(false);
@@ -62,9 +61,9 @@ function CustomerPortal()
 
 
 	  const user = {
-		 "top customer boolean": customerTopBoolean,
+		"top customer boolean": customerTopBoolean,
 		"deparrture date": departureDate,
-		 "departure time": departureTime,
+		"departure time": departureTime,
 	   "role": "",
 		"customer ID" : idNum,
 	   "firstName": firstName, 
@@ -86,14 +85,10 @@ function CustomerPortal()
 	   "payment id": paymentID,
 	   "purchase date": purchaseDate, 
 		"purchase time": purchaseTime,
-		 "booking agent id": bookingAgentID,
-		  "record id": recordID
+		"booking agent id": bookingAgentID,
+		"record id": recordID
 	    
    };
-
-   const historystuff = () => {
-      history.push("/")
-   }
 	
    const AirplaneRender = (props) => {
 	   setNewAirplane(!NewAirplaneShown);
@@ -261,10 +256,10 @@ function CustomerPortal()
             name='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-			onChange={(e) => setPaymentID((e.target.value))}
-			onChange={(e) => setPurchaseDate((e.target.value))}
-			onChange={(e) => setPurchaseTime((e.target.value))}
-			onChange={(e) => setBasePrice(e.target.value)}
+			   onChange={(e) => setPaymentID((e.target.value))}
+			   onChange={(e) => setPurchaseDate((e.target.value))}
+			   onChange={(e) => setPurchaseTime((e.target.value))}
+			   onChange={(e) => setBasePrice(e.target.value)}
             />
             </p>
          </form>
@@ -297,7 +292,7 @@ function CustomerPortal()
          
       </div>
       </div> 
-      <Button style = {{marginTop: '10px', width: '10%'}} variant="contained" color="secondary" onClick = {historystuff}> Log Out </Button>
+      <Button style = {{marginTop: '10px', width: '10%'}} variant="contained" color="secondary" href= './home'> Log Out </Button>
       </div>
 
    );

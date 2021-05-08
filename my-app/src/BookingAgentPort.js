@@ -29,6 +29,7 @@ function BookingAgentPort()
    const [NewAirplaneShown,setNewAirplane] = useState(false);
    const [NewAirportShown,setNewAirport] = useState(false);
    const [NewFlightShown,setNewFlight] = useState(false);
+   const [tableShown,setTableShown] = useState(false);
    const [airportName, setAirportName] = useState("");
    const [airlineID, setAirlineID] = useState("");
    const [city, setCity] = useState("");
@@ -256,7 +257,7 @@ function BookingAgentPort()
       <Link variant="contained" color="secondary" to= '/CustomerInfo'> Click to Update Information </Link>
       <div style = {{display: 'flex', direction: 'row', width: '800px', alignItems: 'center'}}>
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null} href = './Table'> View Customer Flights </Button>
+         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Customer Flights </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href= './SearchPage'> Search For Flights </Button>
 		   <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View My Commission </Button>
       </div>

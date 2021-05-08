@@ -8,6 +8,7 @@ import logo from './PngItem_61922.png';
 import Home from './home'
 import Navigation from './navigation';
 import CustomerInfo from './CustomerInfo';
+import {useHistory} from 'react-router-dom';
 
 
 function CustomerPortal()

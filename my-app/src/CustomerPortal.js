@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 import Table from './Table'
 import SearchPage from './SearchPage'
@@ -9,6 +9,7 @@ import Home from './home'
 import Navigation from './navigation';
 import CustomerInfo from './CustomerInfo';
 import {useHistory} from 'react-router-dom';
+import RatingTable from './RatingTable';
 
 
 function CustomerPortal()
@@ -20,8 +21,8 @@ function CustomerPortal()
    const [customerTopBoolean, setcustopbool] = useState(false);
    const [PurchaseNewTickets, setNewTicket] = useState(false);
    const [NewRating, setNewRating] = useState(false);
-   const [NewAirplaneShown,setNewAirplane] = useState(false);
-   const [NewAirportShown,setNewAirport] = useState(false);
+   const [viewTable, setTable] = useState(false)
+   const [data,updateData] = useState("");
    const [NewFlightShown,setNewFlight] = useState(false);
    const [airportName, setAirportName] = useState("");
    const [airlineID, setAirlineID] = useState("");
@@ -97,27 +98,32 @@ function CustomerPortal()
    const historystuff = () => {
 	  sessionStorage.setItem("token", null);
 	  sessionStorage.setItem("role", null);
-      history.push("/")
+     console.log("hello")
+     history.push("/");
    }
 	
-   const AirplaneRender = (props) => {
-	   setNewAirplane(!NewAirplaneShown);
-      setNewAirport(false);
-      setNewFlight(false);
-      console.log("airline");
+   const viewFlightRender = () =>
+   {
+      setTable(!viewTable);
    }
-   const AirportRender = (props) => {
-	   setNewAirplane(false);
-      setNewAirport(!NewAirportShown);
-      setNewFlight(false);
-      console.log("airline");
+   const getItems = () => {
+      fetch("http://localhost:5000/cus-flights-table",{
+         method: 'POST',
+         body: JSON.stringify({ user }),
+         headers: { 'Content-Type': 'application/json' },
+      })
+      .then(res => res.json())
+      .then(response => {
+         updateData(response);
+      })
+      .catch((error) => console.log(error));
    }
-   const FlightRender = (props) => {
-	   setNewAirplane(false);
-      setNewAirport(false);
-      setNewFlight(!NewFlightShown);
-      console.log("airline");
-   }
+   useEffect(() => {
+      getItems();
+    }, []);
+   const rateTable = (
+      <RatingTable data = {data}/>
+   )
    const PurchaseTicketRender = (props) => {
       setNewTicket(!PurchaseNewTickets);
 	  setNewRating(false);
@@ -264,7 +270,7 @@ function CustomerPortal()
       <Link variant="contained" color="secondary" to= '/CustomerInfo'> Click to Update Information </Link>
       <div style = {{display: 'flex', direction: 'row', width: '800px', alignItems: 'center'}}>
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null} href = './Table'> View Flights </Button>
+         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {viewFlightRender}> View Flights </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href= './SearchPage'> Search For Flights </Button>
 		<Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> Track My Spending </Button>
 
@@ -277,11 +283,12 @@ function CustomerPortal()
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating ? '50%' : '0px'}`, alignItems: 'center'}}>
          {PurchaseNewTickets ? PurchaseTickets: null }    
          {NewRating ? CommentRating : null }
+         {viewTable ? rateTable : null}
 
          
       </div>
       </div> 
-      <Button style = {{marginTop: '10px', width: '10%'}} variant="contained" color="secondary" href= './home'> Log Out </Button>
+      <Button style = {{marginTop: '10px', width: '10%'}} variant="contained" color="secondary" onClick = {historystuff}> Log Out </Button> 
       </div>
 
    );

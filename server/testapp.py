@@ -59,6 +59,41 @@ def newTicket():
         return jsonify("ee got through finding a flight")
     return jsonify("big error")
 
+
+@app.route('/buyNewTicketBook', methods = ['POST'])
+def newTicket():
+    data = request.json
+    curs = conn.cursor()
+    query = 'SELECT * FROM `booking_agent` WHERE `booking_agent_id` = %(booking_agent_id)s '
+    curs.execute(query, data["user"])
+    res = curs.fetchall()
+    if (res):
+        query = 'SELECT * FROM `flight` WHERE `flight_num` = %(flight_number)s'
+        curs.execute(query, data["user"])
+        flight = curs.fetchall()
+        if (flight[0]["departure_date_and_time"] > datetime.now()):
+            query_1 = 'SELECT `customer_id` FROM `customer` WHERE `first_name` = %(first_name)s AND `last_name` = %(last_name)s AND `email` = %(email)s '
+            curs.execute(query_1, data["user"])
+            res_1 = curs.fetchall()
+            if (res_1):
+                data["user"]["ticket_id"] = id_generator()
+                data["user"]["ticket_price"] = flight[0]["base_price"]
+                data["user"]["payment_id"] = res_1[0]["payment_id"]
+                data["user"]["purchase_date"] = datetime.now()
+                data["user"]["email"] = res[0]["email"]
+                data["user"]["airline_id"] = flight[0]["airline_id"]
+                data["user"]["booking_agent_id"] = res
+                query_2 = "INSERT INTO `ticket`(`ticket_id`, `customer_id`, \
+                `customer_email_address`, `airline_id`, `flight_num`, \ `sold_price`, `payment_id`, \
+                `purchase_date_and_time`, `booking_agent_id`) VALUES \
+                (%(ticket_id)s,%(customer_ID)s,%(email)s,%(airline_id)s,%(flight_number)s,%(ticket_price)s,%(payment_id)s,%(purchase_date)s,%("")s)"
+                return jsonify("we purchaseddd")
+            return jsonify("NoPayment")
+        return jsonify("ee got through finding a flight")
+    return jsonify("big error")
+
+
+
 @app.route('/giveRatings', methods = ['POST'])
 def submitRating():
     data = request.json

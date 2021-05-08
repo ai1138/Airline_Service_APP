@@ -19,7 +19,7 @@ function BookingAgentPort()
 	const [customerBookingAgentID, setBAID] = useState(false);
 	const [custFirstName, setcustFirstName] = useState(false);
 	const [custLastName, setcustLastName] = useState(false);
-	const [custidNum, setcustidNum] = useState(false);
+	const [custidNum, setcustidNum] = useState("");
 	const [custEmailAddress, setcusEmailAddressl] = useState(false);
 	const [custCardInformation, setcustCardInformation] = useState(false);
 	const [customerTopBoolean, setcustopbool] = useState(false);
@@ -71,12 +71,12 @@ function BookingAgentPort()
 
 
 	  const user = {
-      "role": "",
-      "flightNum":flightNum,
-      "idNum":custidNum,
-      "firstname":custFirstName,
-      "lastname":custLastName,
-      "emailaddy":custEmailAddress
+      "booking_agent_id": sessionStorage.getItem("token"),
+      "flightNum": flightNum,
+      "customer_id": "",
+      "first_name": custFirstName,
+      "last_name": custLastName,
+      "email": custEmailAddress
    };
 
    const historystuff = () => {
@@ -163,28 +163,26 @@ function BookingAgentPort()
 	}
 	}
    const submitNewTicketForm = () => { //this is for the new tickets
-      if(idNum !== "") {
-		  if (email !== "") {
-			  if (airline !== "") {
-				  if (basePrice !== "") {
-					  if (flightNum !== "") {
-						  if (purchaseDate !== "") {
-							  if (purchaseTime !== "") {
-								  if (paymentID !== "") {
-									  if (bookingAgentID !== "") {
-										  console.log("we did it!")
-									  }
-									  else {
-										  console.log("no we didn't...")
-									  }
-								  }
-							  } 
-						  }
-					  }
-				  }
-			  }
-		  }
-	  }
+      if (flightNum !== "") {
+				   console.log("valid airplane")
+				   if (departureDate !== "") {
+					   if (departureTime !== "") {
+						   console.log("we validddd")
+							   fetch('http://localhost:5000/giveRatings', {
+								   method: 'POST',
+								   body: JSON.stringify({user}),
+								   headers: { 'Content-Type': 'application/json' },
+            					})
+							   .then(res => res.json())
+							   .then(data => {
+								   console.log(data);
+							   })
+							   }
+						   }
+			   }
+			   else {
+				   console.log("no valid id num")
+			   }
    }
 
 
@@ -206,14 +204,6 @@ function BookingAgentPort()
             name='flightNum'
             value={flightNum}
             onChange={(e) => setFlightNum(e.target.value)}
-            />
-            </p>
-			<p>Customer ID Num:
-            <input
-            type='text'
-            name='idNum'
-            value={custidNum}
-            onChange={(e) => setIDNum(e.target.value)}
             />
             </p>
 			<p>Customer First Name:
@@ -238,10 +228,6 @@ function BookingAgentPort()
             name='emailaddy'
             value={custEmailAddress}
             onChange={(e) => setEmail(e.target.value)}
-			   onChange={(e) => setPaymentID((e.target.value))}
-			   onChange={(e) => setPurchaseDate((e.target.value))}
-			   onChange={(e) => setPurchaseTime((e.target.value))}
-			   onChange={(e) => setBasePrice(e.target.value)}
             />
             </p>
          </form>

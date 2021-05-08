@@ -13,7 +13,13 @@ import CustomerInfo from './CustomerInfo';
 function CustomerPortal()
 
 {
+<<<<<<< HEAD
 
+=======
+   const history = useHistory();
+   const [rating, setRating] = useState("");
+   const [comment, setComment] = useState("");
+>>>>>>> 9c92c0b1eaa45c333b896634957a76cd09498630
    const [customerTopBoolean, setcustopbool] = useState(false);
    const [PurchaseNewTickets, setNewTicket] = useState(false);
    const [NewRating, setNewRating] = useState(false);
@@ -53,25 +59,32 @@ function CustomerPortal()
 	const [passportExpiration, setPassportExpiration] = useState("");
 	const [passportCountry, setPassportCountry] = useState("");
 	const [ticketID, setticketID] = useState("");
-	const [paymentID, setPaymentID] = useState("");
 	const [purchaseDate, setPurchaseDate] = useState("");
 	const [purchaseTime, setPurchaseTime] = useState("");
 	const [bookingAgentID, setBookingAgentID] = useState("");
-	const [recordID, setRecordID] = useState("");
+	const [paymentID, setPaymentID] = useState("");
 
 
 	  const user = {
+<<<<<<< HEAD
 		"top customer boolean": customerTopBoolean,
 		"deparrture date": departureDate,
 		"departure time": departureTime,
 	   "role": "",
 		"customer ID" : idNum,
+=======
+		  "comment": comment,
+		 "top customer boolean": customerTopBoolean,
+		"deparrture date": departureDate,
+		 "departure time": departureTime,
+		"customer_ID" : sessionStorage.getItem("token"),
+>>>>>>> 9c92c0b1eaa45c333b896634957a76cd09498630
 	   "firstName": firstName, 
 	   "lastName": lastName,
 	   "email": email,
 	   "username": username,
 	   "password": password,
-	   "airline": airline,
+	   "airline_id": "",
 	   "dob": dob,
 	   "phoneNumber": phoneNumber,
 	   "street": street,
@@ -80,6 +93,7 @@ function CustomerPortal()
 	   "passport num": passportNum,
 	   "passport expiration": passportExpiration,
 	   "passport country": passportCountry,
+<<<<<<< HEAD
 	   "flight number": flightNum,
 	   "ticket price": basePrice,
 	   "payment id": paymentID,
@@ -89,6 +103,25 @@ function CustomerPortal()
 		"record id": recordID
 	    
    };
+=======
+	   "flight_number": flightNum,
+	   "ticket_price": "",
+	   "ticket_id": "",
+	   "purchase_date": "", 
+		 "booking agent id": bookingAgentID,
+		  "record_id": "",
+		  "payment_id": "", 
+		  "rating": rating, 
+		  "ticket_price": ""
+	    
+   };
+
+   const historystuff = () => {
+	  sessionStorage.setItem("token", null);
+	  sessionStorage.setItem("role", null);
+      history.push("/")
+   }
+>>>>>>> 9c92c0b1eaa45c333b896634957a76cd09498630
 	
    const AirplaneRender = (props) => {
 	   setNewAirplane(!NewAirplaneShown);
@@ -141,45 +174,48 @@ function CustomerPortal()
 
    const submitNewCommentRateForm = () => {
 		   if (flightNum !== "") {
-			   if (idNum !== "") {
 				   console.log("valid airplane")
 				   if (departureDate !== "") {
 					   if (departureTime !== "") {
 						   console.log("we validddd")
-					   }
-				   }
+							   fetch('http://localhost:5000/giveRatings', {
+								   method: 'POST',
+								   body: JSON.stringify({user}),
+								   headers: { 'Content-Type': 'application/json' },
+            					})
+							   .then(res => res.json())
+							   .then(data => {
+								   console.log(data);
+							   })
+							   }
+						   }
 			   }
 			   else {
 				   console.log("no valid id num")
 			   }
-		   }
-		   else {
-			   console.log("no valid flight num")
-		   }
 	   }
    const submitNewTicketForm = () => { //this is for the new tickets
-      if(idNum !== "") {
-		  if (email !== "") {
-			  if (airline !== "") {
-				  if (basePrice !== "") {
 					  if (flightNum !== "") {
-						  if (purchaseDate !== "") {
-							  if (purchaseTime !== "") {
-								  if (paymentID !== "") {
-									  if (bookingAgentID !== "") {
-										  console.log("we did it!")
-									  }
-									  else {
-										  console.log("no we didn't...")
-									  }
-								  }
-							  } 
-						  }
-					  }
-				  }
-			  }
-		  }
-	  }
+					  	console.log("we made it bro!")
+						fetch('http://localhost:5000/buyNewTicket', {
+								   method: 'POST',
+								   body: JSON.stringify({user}),
+								   headers: { 'Content-Type': 'application/json' },
+            					})
+                                 .then(res => res.json())
+                                    .then(data => {
+                                       console.log(data);
+                                       data = String(JSON.stringify(data))
+                                       data = JSON.stringify(data)
+                                       if(console.log(data.valueOf() === ("NoPayment").valueOf()))
+                                          console.log("yeno")
+                                          history.push("/CustomerInfo")
+                                      // history.push("/")    
+                                     })
+                                     .catch((error) => {
+                                       console.error('Error:', error);
+                                     });
+					}
    }
 
 
@@ -188,37 +224,41 @@ function CustomerPortal()
          <form>
             <p>Depature Date</p>
             <input
-            type='text'
+            type='date'
             name='depatureDate'
             value={departureDate}
-            onChange={(e) => setAirplaneID(e.target.value)}
+            onChange={(e) => setDepartureDate(e.target.value)}
             />
 			<p>Depature Time</p>
             <input
             type='text'
             name='departureTime'
             value={departureTime}
-            onChange={(e) => setAirplaneID(e.target.value)}
+            onChange={(e) => setDepartureTime(e.target.value)}
             />
             <p>Flight Number:</p>
             <input 
             type='text'
-            name='name'
+            name='flightNum'
             value={flightNum}
             onChange={(e) => setFlightNum(e.target.value)}
             />
-            <p> Confirm Customer ID:</p>
-            <input
-            type='text'
-            name='name'
-            value={idNum}
-            onChange={(e) => setIDNum(e.target.value)}
+			<p>Enter your comment here:</p>
+			<textarea rows="4" cols="50" name="comment" form="usrform"
+			value={comment}
+			onChange={(e) => setComment(e.target.value)}
+			>
+			</textarea>
+			<p>Please enter a number between 1-100 to give a rating:</p>
+            <input 
+            type='number'
+            name='rating'
+            value={rating}
+            onChange={(e) => setRating(e.target.value)}
             />
-			<textarea rows="4" cols="50" name="comment" form="usrform">
-			Enter your comment here...</textarea>
          </form>
 
-         <Button variant="contained" color="blue" onClick = {submitNewTicketForm}>submit</Button>
+         <Button variant="contained" color="blue" onClick = {submitNewCommentRateForm}>submit</Button>
       </div>
    );
   
@@ -234,6 +274,7 @@ function CustomerPortal()
             onChange={(e) => setFlightNum(e.target.value)}
             />
             </p>
+<<<<<<< HEAD
 			<p>Confirm Customer ID Num:
             <input
             type='text'
@@ -262,6 +303,8 @@ function CustomerPortal()
 			   onChange={(e) => setBasePrice(e.target.value)}
             />
             </p>
+=======
+>>>>>>> 9c92c0b1eaa45c333b896634957a76cd09498630
          </form>
          <Button variant="contained" color="blue" onClick = {submitNewTicketForm}>submit</Button>
       </div>

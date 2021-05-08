@@ -6,6 +6,7 @@ import pymysql.cursors
 from flask_cors import CORS,cross_origin
 import string
 import random
+from datetime import *
 app = Flask(__name__)
 config = {
   'ORIGINS': [
@@ -24,6 +25,39 @@ conn = pymysql.connect(host='localhost',
                        cursorclass=pymysql.cursors.DictCursor, port=8889)
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
+@app.route('/buyNewTicket', methods = ['POST'])
+def newTicket():
+    data = request.json
+    curs = conn.cursor()
+    query = 'SELECT * FROM `customer` WHERE `customer_id` = %(customer_ID)s '
+    curs.execute(query, data["user"])
+    res = curs.fetchall()
+    if (res):
+        query = 'SELECT * FROM `flight` WHERE `flight_num` = %(flight_number)s'
+        curs.execute(query, data["user"])
+        flight = curs.fetchall()
+        print("this is resss!!!", flight[0]["departure_date_and_time"])
+        print("this is datetimeee nowww", datetime.now())
+        if (flight[0]["departure_date_and_time"] > datetime.now()):
+            query_1 = 'SELECT * FROM `payment_info` WHERE `customer_id` = %(customer_ID)s'
+            curs.execute(query_1, data["user"])
+            res_1 = curs.fetchall()
+            if (res_1):
+                data["user"]["ticket_id"] = id_generator()
+                data["user"]["ticket_price"] = flight[0]["base_price"]
+                data["user"]["payment_id"] = res_1[0]["payment_id"]
+                data["user"]["purchase_date"] = datetime.now()
+                data["user"]["email"] = res[0]["email"]
+                data["user"]["airline_id"] = flight[0]["airline_id"]
+                query_2 = "INSERT INTO `ticket`(`ticket_id`, `customer_id`, \
+                `customer_email_address`, `airline_id`, `flight_num`, \ `sold_price`, `payment_id`, \
+                `purchase_date_and_time`, `booking_agent_id`) VALUES \
+                (%(ticket_id)s,%(customer_ID)s,%(email)s,%(airline_id)s,%(flight_number)s,%(ticket_price)s,%(payment_id)s,%(purchase_date)s,%("")s)"
+                return jsonify("we purchaseddd")
+            return False
+        return jsonify("ee got through finding a flight")
+    return jsonify("big error")
 
 @app.route('/giveRatings', methods = ['POST'])
 def submitRating():

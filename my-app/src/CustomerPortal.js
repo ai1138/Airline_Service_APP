@@ -73,7 +73,7 @@ function CustomerPortal()
 	   "email": email,
 	   "username": username,
 	   "password": password,
-	   "airline": airline,
+	   "airline_id": "",
 	   "dob": dob,
 	   "phoneNumber": phoneNumber,
 	   "street": street,
@@ -83,14 +83,14 @@ function CustomerPortal()
 	   "passport expiration": passportExpiration,
 	   "passport country": passportCountry,
 	   "flight_number": flightNum,
-	   "ticket price": basePrice,
-	   "payment id": paymentID,
-	   "purchase date": purchaseDate, 
-		"purchase time": purchaseTime,
+	   "ticket_price": "",
+	   "ticket_id": "",
+	   "purchase_date": "", 
 		 "booking agent id": bookingAgentID,
 		  "record_id": "",
 		  "payment_id": "", 
-		  "rating": rating
+		  "rating": rating, 
+		  "ticket_price": ""
 	    
    };
 
@@ -172,24 +172,24 @@ function CustomerPortal()
 			   }
 	   }
    const submitNewTicketForm = () => { //this is for the new tickets
-		  if (email !== "") {
-			  if (airline !== "") {
 					  if (flightNum !== "") {
-						  if (purchaseDate !== "") {
-							  if (purchaseTime !== "") {
-								  if (paymentID !== "") { //randomly generate
-									  if (bookingAgentID !== "") {
-										  console.log("we did it!")
-									  }
-									  else {
-										  console.log("no we didn't...")
-									  }
-								  }
-							  } 
-						  }
-					  }
-				  }
-		  }
+					  	console.log("we made it bro!")
+						fetch('http://localhost:5000/buyNewTicket', {
+								   method: 'POST',
+								   body: JSON.stringify({user}),
+								   headers: { 'Content-Type': 'application/json' },
+            					})
+							   .then(res => res.json())
+							   .then(data => {
+								   console.log(data);
+                                     //  data = String(JSON.stringify(data))
+                                     //  data = JSON.stringify(data)
+                                       if(console.log(!data)) {
+										    history.push("/CustomerInfo")
+									   }
+									  
+							   })
+					}
    }
 
 
@@ -246,26 +246,6 @@ function CustomerPortal()
             name='flightNum'
             value={flightNum}
             onChange={(e) => setFlightNum(e.target.value)}
-            />
-            </p>
-			<p>Confirm Booking Agent ID Num:
-            <input
-            type='number'
-            name='name'
-            value={bookingAgentID}
-            onChange={(e) => setBookingAgentID(e.target.value)}
-            />
-            </p>
-			<p>Confirm Email Address:
-            <input
-            type='text'
-            name='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-			onChange={(e) => setPaymentID((e.target.value))}
-			onChange={(e) => setPurchaseDate((e.target.value))}
-			onChange={(e) => setPurchaseTime((e.target.value))}
-			onChange={(e) => setBasePrice(e.target.value)}
             />
             </p>
          </form>

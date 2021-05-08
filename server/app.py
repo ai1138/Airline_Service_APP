@@ -32,7 +32,41 @@ def updateFlightStat():
     pass
 @app.route('/airline-flights-table', methods = ['POST'])
 def show_airline_flight():
-    pass    
+    data = request.json
+    cursor = conn.cursor()
+    query = 'SELECT * FROM `airline_staff` WHERE `staff_id` = %(session_id)s'
+    cursor.execute(query,data["user"])
+    res = cursor.fetchall()
+    data["user"]["flightairlineID"] = res[0]["airline_id"]
+    query = 'SELECT name FROM `airline` WHERE airline_id = %(flightairlineID)s'
+    cursor.execute(query,data["user"])
+    airLineName = cursor.fetchall()
+    data["user"]["airLineName"] = airLineName[0]["name"]
+    if(res):
+        query = 'select *\
+        from flight inner join airline on %(flightairlineID)s = %(flightairlineID)s\
+        where  %(airLineName)s= airline.name'
+        cursor.execute(query,data["user"])
+        flightNum = cursor.fetchall()
+        return jsonify(flightNum)
+        
+    return jsonify("err")
+
+@app.route('/agent-table',methods=['POST'])
+def getAgents():
+    data = request.json
+    cursor = conn.cursor()
+    query = 'SELECT * FROM `airline_staff` WHERE `staff_id` = %(session_id)s'
+    cursor.execute(query,data["user"])
+    res = cursor.fetchall()
+    if(res):
+        cursor = conn.cursor()
+        query = 'SELECT * FROM `booking_agent`'
+        cursor.execute(query)
+        data = cursor.fetchall()
+        data = jsonify(data)
+        return data
+    return jsonify("err")
 
 @app.route('/login', methods =['POST'])
 def login():

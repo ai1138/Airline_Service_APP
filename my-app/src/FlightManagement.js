@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 import Table from './Table'
 import SearchPage from './SearchPage'
@@ -8,15 +8,19 @@ import logo from './PngItem_61922.png';
 import Home from './home'
 import Navigation from './navigation';
 import {useHistory} from 'react-router-dom';
+import PeopleTable from './PeopleTable'
 
 
 function FlightManagement()
 {
+   const fetchURL = "http://localhost:5000/airline-flights-table";
    const history = useHistory();
    const [NewAirplaneShown,setNewAirplane] = useState(false);
    const [NewAirportShown,setNewAirport] = useState(false);
    const [NewFlightShown,setNewFlight] = useState(false);
    const [FlightStatusShown,setFlightStatus] = useState(false);
+   const [tableShown,setTableShown] = useState(false);
+   const [showBA,setBA] = useState(false);
    const [airportName, setAirportName] = useState("");
    const [airlineID, setAirlineID] = useState("");
    const [city, setCity] = useState("");
@@ -36,11 +40,14 @@ function FlightManagement()
    const [airplaneID, setAirplaneID] = useState("");
    const [flightnumstatus, setflightnumstatus] = useState("");
    const [newflightstatus, setnewflightstatus] = useState("");
+   const [data, updateData] = useState('');
+   const [agents,updateAgents] = useState('');
 
 
-   const flightstuff = {
+   const user = {
+      "airLineName":"",
       "airportName": airportName,
-      "airlineID": airlineID,
+      "airlineID": "",
       "city": city,
       "flightNum": flightNum,
       "flightStat": flightStat,
@@ -57,13 +64,44 @@ function FlightManagement()
       "numofSeats": numofSeats,
       "airplaneID": airplaneID,
       "flightnumstatus": flightnumstatus,
-      "newflightstatus": newflightstatus
+      "newflightstatus": newflightstatus,
+      "session_id": sessionStorage.getItem("token")
    };
 
    const historystuff = () => {
+      sessionStorage.setItem("token","");
+      sessionStorage.setItem("role",null)
       history.push("/")
-   }
 
+   }
+   const getItems = () => {
+      fetch(fetchURL,{
+         method: 'POST',
+         body: JSON.stringify({ user }),
+         headers: { 'Content-Type': 'application/json' },
+      })
+      .then(res => res.json())
+      .then(response => {
+         updateData(response);
+      })
+      .catch((error) => console.log(error));
+   }
+   const getAgents = () => {
+      fetch("http://localhost:5000/agent-table",{
+         method: 'POST',
+         body: JSON.stringify({ user }),
+         headers: { 'Content-Type': 'application/json' },
+      })
+      .then(res => res.json())
+      .then(response => {
+         updateAgents(response);
+      })
+      .catch((error) => console.log(error));
+   }
+   useEffect(() => {
+      getItems();
+      getAgents();
+    }, []);
    const AirplaneRender = (props) => {
 	   setNewAirplane(!NewAirplaneShown);
       setNewAirport(false);
@@ -92,18 +130,28 @@ function FlightManagement()
       setFlightStatus(!FlightStatusShown);
       console.log("flightStatus");
    }
-   const submitNewAirportForm = () =>
+   const baTableRender = () =>
    {
-      if(airportName !=="")
-         if(airlineID!== "")
-            if(city!=="")
-            {
-               console.log("yeee")
-            }
-            else
-            {
-               console.log("naw")
-            }
+      setBA(!showBA);
+   }
+   const flightTableRender = () =>
+   {
+      setTableShown(!tableShown)
+   }
+   const updateFlightStatus = () =>
+   {
+      if(flightNum !== "")
+         if(flightStat !== "")
+         fetch('http://localhost:5000/updateFlight', {
+            method: 'POST',
+            body: JSON.stringify({ user }),
+            headers: { 'Content-Type': 'application/json' },
+         })
+         .then(res => res.json())
+         .then(data => {
+            console.log(data)
+         });
+            
    }
    
    const submitNewAirplaneForm = () =>
@@ -155,7 +203,12 @@ function FlightManagement()
          }
    }
 
-
+   const viewFlights = (
+      <Table data= {data}/>
+   );
+   const viewAgents = (
+      <PeopleTable data= {agents}/>
+   );
    const NewAirportForm = (
       <div>
          <form>
@@ -181,7 +234,7 @@ function FlightManagement()
             onChange={(e) => setCity(e.target.value)}
             />
          </form>
-         <Button variant="contained" color="blue" onClick = {submitNewAirportForm}>submit</Button>
+         <Button variant="contained" color="blue">submit</Button>
       </div>
    );
    const NewAirplaneForm = (
@@ -330,10 +383,9 @@ function FlightManagement()
             />
             </p>
          </form>
-         <Button variant="contained" color="blue" onClick = {submitFlightStatusForm}>submit</Button>
+         <Button variant="contained" color="blue" onClick = {updateFlightStatus}>submit</Button>
       </div>
    );
-   
    return (
       
    <div style = {{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
@@ -341,9 +393,10 @@ function FlightManagement()
       <h1> Staff Portal </h1>
       <div style = {{display: 'flex', direction: 'row', width: '800px', alignItems: 'center'}}>
       <div style = {{display: 'flex', width: `${FlightStatusShown || NewFlightShown || NewAirplaneShown || NewAirportShown ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Flights </Button>
+         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {flightTableRender}> View Flights </Button>
+         
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Flight Ratings </Button>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Booking Agents </Button>
+         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {baTableRender}> View Booking Agents </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Frequent Customers </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Reports </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Frequent Customers </Button>
@@ -358,6 +411,8 @@ function FlightManagement()
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {AirportRender}> Add New Airport </Button>
       </div>
       <div style = {{display: 'flex', width: `${FlightStatusShown || NewFlightShown || NewAirplaneShown || NewAirportShown ? '50%' : '0px'}`, alignItems: 'center'}}>
+         {tableShown ? viewFlights : null }
+         {showBA ? viewAgents:null}
          {FlightStatusShown ? FlightStatus: null }    
          {NewFlightShown ? NewFlightForm : null }
          {NewAirplaneShown ? NewAirplaneForm : null }

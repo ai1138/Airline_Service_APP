@@ -38,6 +38,7 @@ function Registerpage ()
 
    const user =
    {
+      "airline_id" : "",
       "id" : "",
       "role" : "",
       "firstName" : firstName,
@@ -115,7 +116,7 @@ function Registerpage ()
                                        if(console.log(data.valueOf() === ("Success").valueOf()))
                                           console.log("yeno")
                                           history.push("/lspage")
-                                      // history.push("/")    
+                                       history.push("/")    
                                      })
                                      .catch((error) => {
                                        console.error('Error:', error);
@@ -134,7 +135,6 @@ function Registerpage ()
             if(firstName !== "")
                if(lastName !== "")
                   if(email !== "")
-                     
                      if(username !== "")
                         if(password !== "")
                         {

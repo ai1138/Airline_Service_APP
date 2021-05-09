@@ -27,6 +27,116 @@ conn = pymysql.connect(host='localhost',
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
+
+@app.route('/viewFlightsCust', methods = ['POST'])
+def getFlightsCust():
+    data = request.json
+    curs = conn.cursor()
+    query = 'SELECT * FROM `customer` WHERE `customer_id` = %(customer_ID)s' #security to check if the customer is even valid
+    curs.execute(query, data["user"])
+    res = curs.fetchall()
+    if res:
+        query_1 = 'SELECT * FROM `ticket` WHERE `customer_id` = %(customer_ID)s'
+        curs.execute(query, data["user"])
+        tickets = curs.fetchall()
+        print("this the ticketsss!!!!", tickets)
+        return jsonify("yeah retrieving the tickets was successful")
+    return jsonify("yeah ion think this customer bought any tickets chief")
+
+@app.route('/buyNewTicket', methods = ['POST'])
+def newTicket():
+    data = request.json
+    curs = conn.cursor()
+    query = 'SELECT * FROM `customer` WHERE `customer_id` = %(customer_ID)s '
+    curs.execute(query, data["user"])
+    res = curs.fetchall()
+    if (res):
+        query = 'SELECT * FROM `flight` WHERE `flight_num` = %(flight_number)s'
+        curs.execute(query, data["user"])
+        flight = curs.fetchall()
+        print("this is resss!!!", flight[0]["departure_date_and_time"])
+        print("this is datetimeee nowww", datetime.now())
+        if (flight[0]["departure_date_and_time"] > datetime.now()):
+            query_1 = 'SELECT * FROM `payment_info` WHERE `customer_id` = %(customer_ID)s'
+            curs.execute(query_1, data["user"])
+            res_1 = curs.fetchall()
+            if (res_1):
+                data["user"]["ticket_id"] = id_generator()
+                data["user"]["ticket_price"] = flight[0]["base_price"]
+                data["user"]["payment_id"] = res_1[0]["payment_id"]
+                data["user"]["purchase_date"] = datetime.now()
+                data["user"]["email"] = res[0]["email"]
+                data["user"]["airline_id"] = flight[0]["airline_id"]
+                query_2 = "INSERT INTO `ticket`(`ticket_id`, `customer_id`, \
+                `customer_email_address`, `airline_id`, `flight_num`, \ `sold_price`, `payment_id`, \
+                `purchase_date_and_time`, `booking_agent_id`) VALUES \
+                (%(ticket_id)s,%(customer_ID)s,%(email)s,%(airline_id)s,%(flight_number)s,%(ticket_price)s,%(payment_id)s,%(purchase_date)s,%("")s)"
+                return jsonify("we purchaseddd")
+            return jsonify("NoPayment")
+        return jsonify("ee got through finding a flight")
+    return jsonify("big error")
+
+
+@app.route('/buyNewTicketBook', methods = ['POST'])
+def newTicketBook():
+    data = request.json
+    curs = conn.cursor()
+    query = 'SELECT * FROM `booking_agent` WHERE `booking_agent_id` = %(booking_agent_id)s '
+    curs.execute(query, data["user"])
+    booking = curs.fetchall()
+    if (booking):
+        query = 'SELECT * FROM `flight` WHERE `flight_num` = %(flight_number)s'
+        curs.execute(query, data["user"])
+        flight = curs.fetchall()
+        if (flight[0]["departure_date_and_time"] > datetime.now()):
+            query_1 = 'SELECT * FROM `customer` WHERE `first_name` = %(first_name)s AND `last_name` = %(last_name)s AND `email` = %(email)s '
+            curs.execute(query_1, data["user"])
+            customer = curs.fetchall()
+            if (customer):
+                query_2 = 'SELECT `payment_id` FROM `payment_info` WHERE `customer_id` = %(customer_id)s'
+                print(customer)
+                curs.execute(query_2, data["user"])
+                payment = curs.fetchall()
+                if (payment):
+                    data["user"]["ticket_id"] = id_generator()
+                    data["user"]["ticket_price"] = flight[0]["base_price"]
+                    data["user"]["payment_id"] = payment[0]["payment_id"]
+                    data["user"]["purchase_date"] = datetime.now()
+                    data["user"]["email"] = customer[0]["email"]
+                    data["user"]["airline_id"] = flight[0]["airline_id"]
+                    data["user"]["booking_agent_id"] = booking[0]["booking_agent_id"]
+                    query_3 = "INSERT INTO `ticket`(`ticket_id`, `customer_id`, \
+                    `customer_email_address`, `airline_id`, `flight_num`, \ `sold_price`, `payment_id`, \
+                    `purchase_date_and_time`, `booking_agent_id`) VALUES \
+                    (%(ticket_id)s,%(customer_ID)s,%(email)s,%(airline_id)s,%(flight_number)s,%(ticket_price)s,%(payment_id)s,%(purchase_date)s,%("")s)"
+                    return jsonify("we done had purchase with a booking agent")
+                return jsonify("NoPayment")
+            return jsonify("NoValidCustomer")
+        return jsonify("This Flight Never...Happened?")
+    return jsonify("This Booking Agent Does Not Exist")
+
+
+@app.route('/giveRatings', methods = ['POST'])
+def submitRating():
+    data = request.json
+    custID = data["user"]["customer_ID"]
+    curs = conn.cursor()
+    query = 'SELECT * FROM `customer` WHERE `customer_id` = %(customer_id)s '
+    curs.execute(query, data["user"])
+    res = curs.fetchall()
+
+    if (res):
+       query_1 = 'SELECT * FROM `flight` WHERE `flight_num` = %(flight_number)s'
+       curs.execute(query_1, data["user"])
+       res_1 = curs.fetchall()
+
+       if (res_1):
+           data["user"]["record_id"] = id_generator()
+           query_2 = 'INSERT INTO `past_flights`(`flight_num`, `customer_id`, `rate`, `comments`, `record_id`) \
+           VALUES (%(flight_number)s,%(customer_ID)s,%(rating)s,%(comment)s,%(record_id)s)'
+           curs.execute(query_2, data["user"])
+           return jsonify("successfullll")
+
 @app.route('/ba-flights-table', methods =['POST'])
 def baCustomer():
     data = request.json

@@ -86,7 +86,7 @@ def newTicket():
                 query_2 = "INSERT INTO `ticket`(`ticket_id`, `customer_id`, \
                 `customer_email_address`, `airline_id`, `flight_num`, \ `sold_price`, `payment_id`, \
                 `purchase_date_and_time`, `booking_agent_id`) VALUES \
-                (%(ticket_id)s,%(customer_ID)s,%(email)s,%(airline_id)s,%(flight_number)s,%(ticket_price)s,%(payment_id)s,%(purchase_date)s,%("")s)"
+                (%(ticket_id)s,%(customer_ID)s,%(email)s,%(airline_id)s,%(flight_number)s,%(ticket_price)s,%(payment_id)s,%(purchase_date)s,%("")s,)"
                 return jsonify("we purchaseddd")
             return jsonify("NoPayment")
         return jsonify("ee got through finding a flight")
@@ -107,7 +107,6 @@ def submitRating():
        query_1 = 'SELECT * FROM `flight` WHERE `flight_num` = %(flight_number)s'
        curs.execute(query_1, data["user"])
        res_1 = curs.fetchall()
-
        if (res_1):
            data["user"]["record_id"] = id_generator()
            query_2 = 'INSERT INTO `past_flights`(`flight_num`, `customer_id`, `rate`, `comments`, `record_id`) \

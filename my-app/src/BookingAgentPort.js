@@ -17,10 +17,10 @@ function BookingAgentPort()
 {
    const history = useHistory();
 	const [customerBookingAgentID, setBAID] = useState(false);
-	const [custFirstName, setcustFirstName] = useState(false);
-	const [custLastName, setcustLastName] = useState(false);
+	const [custFirstName, setcustFirstName] = useState("");
+	const [custLastName, setcustLastName] = useState("");
 	const [custidNum, setcustidNum] = useState("");
-	const [custEmailAddress, setcusEmailAddressl] = useState(false);
+	const [custEmailAddress, setcusEmailAddress] = useState("");
 	const [custCardInformation, setcustCardInformation] = useState(false);
 	const [customerTopBoolean, setcustopbool] = useState(false);
    const [PurchaseNewTickets, setNewTicket] = useState(false);
@@ -72,11 +72,12 @@ function BookingAgentPort()
 
 	  const user = {
       "booking_agent_id": sessionStorage.getItem("token"),
-      "flightNum": flightNum,
+      "flight_number": flightNum,
       "customer_id": "",
       "first_name": custFirstName,
       "last_name": custLastName,
-      "email": custEmailAddress
+      "email": custEmailAddress,
+	  "payment_id": ""
    };
 
    const historystuff = () => {
@@ -114,23 +115,6 @@ function BookingAgentPort()
 	   console.log("customers topp");
 
    }
-  // handlePurchaseDate(event)  {
-		//this function is supposed to read purchase date from the system
-//		this.setPurchaseDate({value: event.target.value});
-//	}
-   
-//	handlePurchaseTime(event)  {
-		//this function is supposed to read purchase time from the system
-//		this.setPurchaseDate({value: event.target.value})
-//	}
-//	handleSoldPrice(event)  {
-		//this function is supposed to read sold price from database
-//		this.setPurchaseDate({value: event.target.value})
-//	}
-//	handlePaymentIDe(event)  {
-		//this function is supposed to generate a random payment id and set it
-//		this.setPurchaseDate({value: event.target.value})
-//	}
 
  
 
@@ -165,10 +149,8 @@ function BookingAgentPort()
    const submitNewTicketForm = () => { //this is for the new tickets
       if (flightNum !== "") {
 				   console.log("valid airplane")
-				   if (departureDate !== "") {
-					   if (departureTime !== "") {
-						   console.log("we validddd")
-							   fetch('http://localhost:5000/giveRatings', {
+				   console.log("we validddd")
+							   fetch('http://localhost:5000//buyNewTicketBook', {
 								   method: 'POST',
 								   body: JSON.stringify({user}),
 								   headers: { 'Content-Type': 'application/json' },
@@ -177,8 +159,6 @@ function BookingAgentPort()
 							   .then(data => {
 								   console.log(data);
 							   })
-							   }
-						   }
 			   }
 			   else {
 				   console.log("no valid id num")
@@ -209,25 +189,25 @@ function BookingAgentPort()
 			<p>Customer First Name:
             <input
             type='text'
-            name='firstname'
+            name='custFirstName'
             value={custFirstName}
-            onChange={(e) => setIDNum(e.target.value)}
+            onChange={(e) => setcustFirstName(e.target.value)}
             />
             </p>
 			<p>Customer Last Name:
             <input
             type='text'
-            name='lastname'
+            name='custLastName'
             value={custLastName}
-            onChange={(e) => setIDNum(e.target.value)}
+            onChange={(e) => setcustLastName(e.target.value)}
             />
             </p>
 			<p>Customer Email Address:
             <input
             type='text'
-            name='emailaddy'
+            name='custEmailAddress'
             value={custEmailAddress}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setcusEmailAddress(e.target.value)}
             />
             </p>
          </form>

@@ -91,26 +91,6 @@ def newTicketBook():
         if (flight[0]["departure_date_and_time"] > datetime.now()):
             query_1 = 'SELECT * FROM `customer` WHERE `first_name` = %(first_name)s AND `last_name` = %(last_name)s AND `email` = %(email)s '
             curs.execute(query_1, data["user"])
-<<<<<<< HEAD
-            res_1 = curs.fetchall()
-            if (res_1):
-                data["user"]["ticket_id"] = id_generator()
-                data["user"]["ticket_price"] = flight[0]["base_price"]
-                data["user"]["payment_id"] = res_1[0]["payment_id"]
-                data["user"]["purchase_date"] = datetime.now()
-                data["user"]["email"] = res[0]["email"]
-                data["user"]["airline_id"] = flight[0]["airline_id"]
-                data["user"]["booking_agent_id"] = res
-                query_2 = "INSERT INTO `ticket`(`ticket_id`, `customer_id`, \
-                `customer_email_address`, `airline_id`, `flight_num`, \ `sold_price`, `payment_id`, \
-                `purchase_date_and_time`, `booking_agent_id`) VALUES \
-                (%(ticket_id)s,%(customer_ID)s,%(email)s,%(airline_id)s,%(flight_number)s,%(ticket_price)s,%(payment_id)s,%(purchase_date)s,%("")s,)"
-                return jsonify("we purchaseddd")
-            return jsonify("NoPayment")
-        return jsonify("ee got through finding a flight")
-    return jsonify("big error")
-
-=======
             customer = curs.fetchall()
             if (customer):
                 query_2 = 'SELECT `payment_id` FROM `payment_info` WHERE `customer_id` = %(customer_id)s'
@@ -134,7 +114,6 @@ def newTicketBook():
             return jsonify("NoValidCustomer")
         return jsonify("This Flight Never...Happened?")
     return jsonify("This Booking Agent Does Not Exist")
->>>>>>> e3b916016df638d9f913500ea1a3149bf79da82d
 
 
 @app.route('/giveRatings', methods = ['POST'])

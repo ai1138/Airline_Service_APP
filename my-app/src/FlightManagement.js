@@ -8,7 +8,8 @@ import logo from './PngItem_61922.png';
 import Home from './home'
 import Navigation from './navigation';
 import {useHistory} from 'react-router-dom';
-import PeopleTable from './PeopleTable'
+import PeopleTable from './PeopleTable';
+import Revenue from './Revenue';
 
 
 function FlightManagement()
@@ -381,7 +382,7 @@ function FlightManagement()
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Frequent Customers </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href ='ViewReports'> View Reports </Button> 
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Frequent Customers </Button>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Revenue Comparison </Button>
+         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href = 'Revenue'> View Revenue Comparison </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Top Destinations </Button>
          
       </div>

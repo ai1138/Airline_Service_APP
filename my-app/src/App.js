@@ -12,7 +12,8 @@ import CustomerPortal from './CustomerPortal';
 import SearchPage from './SearchPage';
 import Table from "./Table";
 import BookingAgentPort from "./BookingAgentPort";
-
+import Trackspending from "./trackspending";
+import TopCust from "./TopCust";
 
 class App extends Component {
   render() {
@@ -29,6 +30,8 @@ class App extends Component {
 			<Route path= "/SearchPage" component={SearchPage}/>
 			<Route path= "/Table" component={Table}/>
 			<Route path= "/BookingAgentPort" component= {BookingAgentPort}/>
+      <Route path = "/trackspending" component = {Trackspending}/>
+       <Route path = "/TopCust" component = {TopCust}/>
        </Switch>
       </div>
       </BrowserRouter>

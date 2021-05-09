@@ -10,7 +10,7 @@ import Navigation from './navigation';
 import CustomerInfo from './CustomerInfo';
 import {useHistory} from 'react-router-dom';
 import RatingTable from './RatingTable';
-
+import Trackspending from './trackspending';
 
 function CustomerPortal()
 
@@ -272,7 +272,7 @@ function CustomerPortal()
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {viewFlightRender}> View Flights </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href= './SearchPage'> Search For Flights </Button>
-		<Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> Track My Spending </Button>
+		<Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href = './trackspending'> Track My Spending </Button>
 
          
       </div>

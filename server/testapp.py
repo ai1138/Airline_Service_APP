@@ -129,6 +129,7 @@ def submitRating():
        query_1 = 'SELECT * FROM `flight` WHERE `flight_num` = %(flight_number)s'
        curs.execute(query_1, data["user"])
        res_1 = curs.fetchall()
+
        if (res_1):
            data["user"]["record_id"] = id_generator()
            query_2 = 'INSERT INTO `past_flights`(`flight_num`, `customer_id`, `rate`, `comments`, `record_id`) \

@@ -379,7 +379,7 @@ function FlightManagement()
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Flight Ratings </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {baTableRender}> View Booking Agents </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Frequent Customers </Button>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Reports </Button>
+         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href ='ViewReports'> View Reports </Button> 
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Frequent Customers </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Revenue Comparison </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Top Destinations </Button>

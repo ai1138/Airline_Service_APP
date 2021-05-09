@@ -14,6 +14,7 @@ import Table from "./Table";
 import BookingAgentPort from "./BookingAgentPort";
 import Trackspending from "./trackspending";
 import TopCust from "./TopCust";
+import ViewReports from "./ViewReports";
 
 class App extends Component {
   render() {
@@ -32,6 +33,7 @@ class App extends Component {
 			<Route path= "/BookingAgentPort" component= {BookingAgentPort}/>
       <Route path = "/trackspending" component = {Trackspending}/>
        <Route path = "/TopCust" component = {TopCust}/>
+       <Route path = "/ViewReports" component = {ViewReports}/>
        </Switch>
       </div>
       </BrowserRouter>

@@ -42,6 +42,7 @@ function FlightManagement()
    const [newflightstatus, setnewflightstatus] = useState("");
    const [data, updateData] = useState('');
    const [agents,updateAgents] = useState('');
+   const [message,setMessage] = useState('');
 
 
    const user = {
@@ -66,6 +67,7 @@ function FlightManagement()
       "flightnumstatus": flightnumstatus,
       "newflightstatus": newflightstatus,
       "session_id": sessionStorage.getItem("token")
+
    };
 
    const historystuff = () => {
@@ -149,23 +151,25 @@ function FlightManagement()
          })
          .then(res => res.json())
          .then(data => {
-            console.log(data)
+            setMessage(data);
          });
             
    }
    
    const submitNewAirplaneForm = () =>
    {
-      if(airplaneName !=="")
-         if(numofSeats !== "")
-            if(airplaneID !== "")
-            {
-               console.log("yeee")
-            }
-            else
-            {
-               console.log("naw")
-            }
+      if(numofSeats !== 0)
+      {
+         fetch('http://localhost:5000/add-airplane', {
+            method: 'POST',
+            body: JSON.stringify({ user }),
+            headers: { 'Content-Type': 'application/json' },
+         })
+         .then(res => res.json())
+         .then(data => {
+            console.log(data)
+         });
+      }
    }
 
    const submitNewFlightForm = () =>
@@ -182,7 +186,7 @@ function FlightManagement()
                                  if(basePrice !== "")
                                     if(idNum !== "")
                                     {
-                                       console.log("yeee")
+                                       
                                     }
                                     else
                                     {
@@ -219,13 +223,6 @@ function FlightManagement()
             value={airportName}
             onChange={(e) => setAirportName(e.target.value)}
             />
-            <p>Airline ID:</p>
-            <input 
-            type='text'
-            name='airlineID'
-            value={airlineID}
-            onChange={(e) => setAirlineID(e.target.value)}
-            />
             <p> City:</p>
             <input
             type='text'
@@ -240,28 +237,12 @@ function FlightManagement()
    const NewAirplaneForm = (
       <div>
          <form>
-            <p>New Airplane Name:
-            <input
-            type='text'
-            name='airplaneName '
-            value={airplaneName}
-            onChange={(e) => setAirplaneName(e.target.value)}
-            />
-            </p>
             <p>Number of Seats:
             <input
             type='text'
             name='numofSeats'
             value={numofSeats}
             onChange={(e) => setNumofSeats(e.target.value)}
-            />
-            </p>
-            <p>Airline ID:
-            <input
-            type='text'
-            name='airplaneID'
-            value={airplaneID}
-            onChange={(e) => setAirplaneID(e.target.value)}
             />
             </p>
          </form>
@@ -407,8 +388,9 @@ function FlightManagement()
       <div style = {{display: 'flex', width: `${FlightStatusShown || NewFlightShown || NewAirplaneShown || NewAirportShown ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {FlightStatusRender}> Update Flight Status </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {FlightRender}> Add New Flight </Button>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {AirplaneRender}> Add New Airline </Button>
+         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {AirplaneRender}> Add New Airplane </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {AirportRender}> Add New Airport </Button>
+         {message}
       </div>
       <div style = {{display: 'flex', width: `${FlightStatusShown || NewFlightShown || NewAirplaneShown || NewAirportShown ? '50%' : '0px'}`, alignItems: 'center'}}>
          {tableShown ? viewFlights : null }
@@ -417,6 +399,7 @@ function FlightManagement()
          {NewFlightShown ? NewFlightForm : null }
          {NewAirplaneShown ? NewAirplaneForm : null }
          {NewAirportShown ? NewAirportForm: null }
+         
           
       </div>
       </div>

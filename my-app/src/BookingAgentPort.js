@@ -17,10 +17,10 @@ function BookingAgentPort()
 {
    const history = useHistory();
 	const [customerBookingAgentID, setBAID] = useState(false);
-	const [custFirstName, setcustFirstName] = useState(false);
-	const [custLastName, setcustLastName] = useState(false);
+	const [custFirstName, setcustFirstName] = useState("");
+	const [custLastName, setcustLastName] = useState("");
 	const [custidNum, setcustidNum] = useState("");
-	const [custEmailAddress, setcusEmailAddressl] = useState(false);
+	const [custEmailAddress, setcusEmailAddress] = useState("");
 	const [custCardInformation, setcustCardInformation] = useState(false);
 	const [customerTopBoolean, setcustopbool] = useState(false);
    const [PurchaseNewTickets, setNewTicket] = useState(false);
@@ -193,25 +193,25 @@ function BookingAgentPort()
 			<p>Customer First Name:
             <input
             type='text'
-            name='firstname'
+            name='custFirstName'
             value={custFirstName}
-            onChange={(e) => setIDNum(e.target.value)}
+            onChange={(e) => setcustFirstName(e.target.value)}
             />
             </p>
 			<p>Customer Last Name:
             <input
             type='text'
-            name='lastname'
+            name='custLastName'
             value={custLastName}
-            onChange={(e) => setIDNum(e.target.value)}
+            onChange={(e) => setcustLastName(e.target.value)}
             />
             </p>
 			<p>Customer Email Address:
             <input
             type='text'
-            name='emailaddy'
+            name='custEmailAddress'
             value={custEmailAddress}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setcusEmailAddress(e.target.value)}
             />
             </p>
          </form>

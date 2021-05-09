@@ -76,7 +76,8 @@ function BookingAgentPort()
       "customer_id": "",
       "first_name": custFirstName,
       "last_name": custLastName,
-      "email": custEmailAddress
+      "email": custEmailAddress,
+	  "payment_id": ""
    };
 
    const historystuff = () => {
@@ -114,23 +115,6 @@ function BookingAgentPort()
 	   console.log("customers topp");
 
    }
-  // handlePurchaseDate(event)  {
-		//this function is supposed to read purchase date from the system
-//		this.setPurchaseDate({value: event.target.value});
-//	}
-   
-//	handlePurchaseTime(event)  {
-		//this function is supposed to read purchase time from the system
-//		this.setPurchaseDate({value: event.target.value})
-//	}
-//	handleSoldPrice(event)  {
-		//this function is supposed to read sold price from database
-//		this.setPurchaseDate({value: event.target.value})
-//	}
-//	handlePaymentIDe(event)  {
-		//this function is supposed to generate a random payment id and set it
-//		this.setPurchaseDate({value: event.target.value})
-//	}
 
  
 

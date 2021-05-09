@@ -229,7 +229,7 @@ function BookingAgentPort()
       </div>
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {PurchaseTicketRender}> Purchase Tickets </Button>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {TopCustomersRender}>  View Top Customers </Button>
+         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href = './TopCust'>  View Top Customers </Button>
       </div>
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating ? '50%' : '0px'}`, alignItems: 'center'}}>
          {PurchaseNewTickets ? PurchaseTickets: null }    

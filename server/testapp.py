@@ -89,11 +89,12 @@ def newTicketBook():
         curs.execute(query, data["user"])
         flight = curs.fetchall()
         if (flight[0]["departure_date_and_time"] > datetime.now()):
-            query_1 = 'SELECT `customer_id` FROM `customer` WHERE `first_name` = %(first_name)s AND `last_name` = %(last_name)s AND `email` = %(email)s '
+            query_1 = 'SELECT * FROM `customer` WHERE `first_name` = %(first_name)s AND `last_name` = %(last_name)s AND `email` = %(email)s '
             curs.execute(query_1, data["user"])
             customer = curs.fetchall()
             if (customer):
                 query_2 = 'SELECT `payment_id` FROM `payment_info` WHERE `customer_id` = %(customer_id)s'
+                print(customer)
                 curs.execute(query_2, data["user"])
                 payment = curs.fetchall()
                 if (payment):

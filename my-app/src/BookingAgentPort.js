@@ -72,7 +72,7 @@ function BookingAgentPort()
 
 	  const user = {
       "booking_agent_id": sessionStorage.getItem("token"),
-      "flightNum": flightNum,
+      "flight_number": flightNum,
       "customer_id": "",
       "first_name": custFirstName,
       "last_name": custLastName,
@@ -149,10 +149,8 @@ function BookingAgentPort()
    const submitNewTicketForm = () => { //this is for the new tickets
       if (flightNum !== "") {
 				   console.log("valid airplane")
-				   if (departureDate !== "") {
-					   if (departureTime !== "") {
-						   console.log("we validddd")
-							   fetch('http://localhost:5000/giveRatings', {
+				   console.log("we validddd")
+							   fetch('http://localhost:5000//buyNewTicketBook', {
 								   method: 'POST',
 								   body: JSON.stringify({user}),
 								   headers: { 'Content-Type': 'application/json' },
@@ -161,8 +159,6 @@ function BookingAgentPort()
 							   .then(data => {
 								   console.log(data);
 							   })
-							   }
-						   }
 			   }
 			   else {
 				   console.log("no valid id num")

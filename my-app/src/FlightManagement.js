@@ -9,6 +9,8 @@ import Home from './home'
 import Navigation from './navigation';
 import {useHistory} from 'react-router-dom';
 import PeopleTable from './PeopleTable'
+import Revenue from './Revenue';
+
 
 
 function FlightManagement()
@@ -409,5 +411,7 @@ function FlightManagement()
    );
 
 }
+
+
 
 export default FlightManagement;

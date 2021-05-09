@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import Table from './Table'
 import SearchPage from './SearchPage'
@@ -9,7 +9,7 @@ import Home from './home'
 import Navigation from './navigation';
 import CustomerInfo from './CustomerInfo';
 import {useHistory} from 'react-router-dom';
-
+import ViewFlightsBA from './ViewFlightsBA';
 
 
 function BookingAgentPort()
@@ -68,8 +68,8 @@ function BookingAgentPort()
 	const [purchaseTime, setPurchaseTime] = useState("");
 	const [bookingAgentID, setBookingAgentID] = useState("");
 	const [recordID, setRecordID] = useState("");
-
-
+   const [viewTable, setTable] = useState(false);
+   const [data, updateData] = useState('');
 	  const user = {
       "booking_agent_id": sessionStorage.getItem("token"),
       "flight_number": flightNum,
@@ -86,24 +86,28 @@ function BookingAgentPort()
       history.push("/")
    }
 	
-   const AirplaneRender = (props) => {
-	   setNewAirplane(!NewAirplaneShown);
-      setNewAirport(false);
-      setNewFlight(false);
-      console.log("airline");
+   const viewFlights = () => {
+      setTable(!viewTable)
+
    }
-   const AirportRender = (props) => {
-	   setNewAirplane(false);
-      setNewAirport(!NewAirportShown);
-      setNewFlight(false);
-      console.log("airline");
+   const getItems = () => {
+      fetch("http://localhost:5000/ba-flights-table",{
+         method: 'POST',
+         body: JSON.stringify({ user }),
+         headers: { 'Content-Type': 'application/json' },
+      })
+      .then(res => res.json())
+      .then(response => {
+         updateData(response);
+      })
+      .catch((error) => console.log(error));
    }
-   const FlightRender = (props) => {
-	   setNewAirplane(false);
-      setNewAirport(false);
-      setNewFlight(!NewFlightShown);
-      console.log("airline");
-   }
+   useEffect(() => {
+      getItems();
+    }, []);
+   const flightTable = (
+      <ViewFlightsBA data = {data}/>
+   )
    const PurchaseTicketRender = (props) => {
       setNewTicket(!PurchaseNewTickets);
 	  setNewRating(false);
@@ -223,7 +227,7 @@ function BookingAgentPort()
       <Link variant="contained" color="secondary" to= '/CustomerInfo'> Click to Update Information </Link>
       <div style = {{display: 'flex', direction: 'row', width: '800px', alignItems: 'center'}}>
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating ? '50%' : '100%'}`,  alignItems: 'center', flexDirection: 'column'}}>
-         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View Customer Flights </Button>
+         <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {viewFlights}> View Customer Flights </Button>
          <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" href= './SearchPage'> Search For Flights </Button>
 		   <Button style = {{marginTop: '10px', width: '50%'}} variant="contained" color="secondary" onClick = {null}> View My Commission </Button>
       </div>
@@ -234,6 +238,7 @@ function BookingAgentPort()
       <div style = {{display: 'flex', width: `${PurchaseNewTickets || NewRating ? '50%' : '0px'}`, alignItems: 'center'}}>
          {PurchaseNewTickets ? PurchaseTickets: null }    
          {SeeTopCustomers ? TopCustomers : null }
+         {viewTable ? flightTable : null}
 
 
          

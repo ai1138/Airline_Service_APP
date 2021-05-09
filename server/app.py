@@ -27,10 +27,38 @@ conn = pymysql.connect(host='localhost',
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-@app.route('/updateFlight', methods =['POST'])
-def updateFlightStat():
+@app.route('/ba-flights-table', methods =['POST'])
+def baCustomer():
     data = request.json
-    pass
+    curs = conn.cursor()
+    query = 'SELECT * FROM `booking_agent` WHERE `booking_agent_id` = %(booking_agent_id)s '
+    curs.execute(query, data["user"])
+    booking = curs.fetchall()
+    if(booking):
+        query = 'SELECT * FROM `ticket`\
+        INNER JOIN flight ON flight.flight_num = ticket.flight_num\
+        INNER JOIN airline ON airline.airline_id = ticket.airline_id\
+        WHERE ticket.booking_agent_id = %(booking_agent_id)s  '
+        curs.execute(query, data["user"])
+        res = curs.fetchall()
+        return jsonify(res)
+    return("err")
+@app.route('/add-airplane', methods =['POST'])
+def addAirplane():
+    data = request.json
+    cursor = conn.cursor()
+    query = 'SELECT * FROM `airline_staff` WHERE `staff_id` = %(session_id)s'
+    cursor.execute(query,data["user"])
+    res = cursor.fetchall()
+    if(res):
+        data["user"]["airlineID"] = res[0]["airline_id"]
+        data["user"]["airplaneID"] = id_generator()
+        query = 'INSERT INTO `airplane`(`airplane_id`, `num_of_seats`, `airline_id`) VALUES (%(airplaneID)s,%(numofSeats)s,%(airlineID)s)'
+        cursor.execute(query,data["user"])
+        return jsonify("yessir")
+    return jsonify("error")
+
+
 
 @app.route('/airline-flights-table', methods = ['POST'])
 def show_airline_flight():

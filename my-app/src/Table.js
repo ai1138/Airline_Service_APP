@@ -11,6 +11,7 @@ function Table(props)
       <table>
         <tr>
           <td> flight_num </td>
+          <td> Air Line </td>
           <td> statuses </td>
           <td> airport_arrival </td>
           <td> departure_airport </td>
@@ -18,6 +19,7 @@ function Table(props)
         {props.data.map((item, index) => (
           <tr key={item.flight_num}>
              <td> {item.flight_num} </td>
+             <td> {item.name}</td>
              <td> {item.statuses} </td>
              <td> {item.airport_arrival} </td>
              <td> {item.departure_airport} </td>  

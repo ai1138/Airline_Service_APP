@@ -141,7 +141,19 @@ def submitRating():
 @app.route('/updateFlight', methods =['POST'])
 def updateFlightStat():
     data = request.json
-    pass
+    curs = conn.cursor()
+    query = 'SELECT * FROM `flight` WHERE `flight_num` = %(flightNum)s' #security check
+    curs.execute(query, data["user"])
+    res = curs.fetchall()
+
+    if res:
+        print("this is resss", res)
+        print("this is data userrr", data["user"])
+        #query_1 = 'UPDATE `flight` SET '
+        return jsonify("the flight exist")
+    return jsonify("no it doesntttt")
+
+
 @app.route('/airline-flights-table', methods = ['POST'])
 def show_airline_flight():
     pass    

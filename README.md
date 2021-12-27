@@ -74,8 +74,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # Running Flask
 ### Install the libaries:
-Flask
-Pymysql
-Flask_Cors
-Run App.py
+* Flask
+* Pymysql
+* Flask_Cors
+### How To run:
+Run the Command Python3 app.py
 
